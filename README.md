@@ -24,6 +24,12 @@ Contents
 Other Resources
 ---------------
 
+* [Caltech Library](http://library.caltech.edu)
+* Caltech's [Office of Student Affairs](http://www.studaff.caltech.edu)
 * Caltech's [Center for Teaching, Learning, and Outreach](http://teachlearn.caltech.edu)
+* [A list of research facilities](https://www.caltech.edu/content/research-facilities)
+* Caltech [Student-Faculty Programs](http://sfp.caltech.edu)
 * [LIGO Laboratory](http://ligo.caltech.edu)
 * Online version of my [curriculum vitae](http://alurban.github.io/)
+
+Finally, if you're feeling overwhelmed, here's [a video of an adorable sloth](https://youtu.be/DkmrWY5zYbA)
