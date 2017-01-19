@@ -1,7 +1,7 @@
 Newtonian Tidal Distortion
 ==========================
 
-In this problem, we will bring together a couple of basic things we know about orbits and make a toy model of a binary neutron star system. The goal is to use what we understand now to inform what we’re going to do next: with nothing more than Kepler’s laws and Newton’s law of gravity, we will build an intuition for what happens just before a pair of neutron stars spiral into one another, and use those insights to strategize the next step.... of science!
+In this problem, we will bring together a couple of basic things we know about orbits and make a toy model of a binary neutron star system. With nothing more than Kepler’s laws and Newton’s law of gravity, we will build an intuition for what happens as a pair of neutron stars spiral into one another, and use those insights to design an awesome orbital simulation.... of science!
 
 Contents
 --------
