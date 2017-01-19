@@ -18,7 +18,7 @@ a = ( G * (2*M) / (pi * f_GW)**2 )**(1./3)
 
 # Compute the binding and tidal forces on a neutron star of radius 11 km.
 F_bind_11 = G * M**2 / 11e3**2
-F_tide_11 = G * M**2 * ( 1 / (a - 10e3)**2 - 1 / (a + 10e3)**2 )
+F_tide_11 = G * M**2 * ( 1 / (a - 11e3)**2 - 1 / (a + 11e3)**2 )
 
 # Do the same for a neurtron star of radius 12 km.
 F_bind_12 = G * M**2 / 12e3**2
