@@ -12,6 +12,8 @@ Contents
 * `matplotlibrc`: A local configuration of matplotlib settings, because I am very picky about how my plots look.
 * `Makefile`: Running `make` will produce a PDF rendering of `tidal_notes.pdf`, the notes document referred to above.
 
+Note: all the details of this problem are captured in `tidal_notes.pdf`.
+
 Software Requirements
 ---------------------
 
