@@ -14,6 +14,8 @@ git clone https://github.com/alurban/mentoring.git
 
 You will be able to retrieve this copy and work from it, but not to push changes unless I grant you permissions. (Please [email me](mailto:aurban@ligo.caltech.edu) if you would like to discuss setting up push privileges.)
 
+Alternatively, you can open this repository in your desktop or download a ZIP-compressed version using the "clone or download" button at the top of this page. This will work from any system.
+
 Contents
 --------
 
