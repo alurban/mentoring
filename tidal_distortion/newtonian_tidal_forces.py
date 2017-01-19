@@ -1,7 +1,7 @@
 # Imports.
 import numpy as np
 from numpy import pi
-import matplotlib as mpl; mpl.use('Agg')
+#import matplotlib as mpl; mpl.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.patheffects as PE
 from matplotlib import ticker
@@ -30,15 +30,15 @@ F_bind_13 = G * M**2 / 13e3**2
 F_tide_13 = G * M**2 * ( 1 / (a - 13e3)**2 - 1 / (a + 13e3)**2 )
 
 # Construct a figure.
-fig = plt.figure( figsize=(12, 10) )
+fig = plt.figure( figsize=(6, 5) )
 
 # Plot the orbital separation as a function of GW frequency.
 ax1 = fig.add_subplot(2, 1, 1)
-ax1.plot(f_GW, a/1e3, 'k', linewidth=2.5)
+ax1.plot(f_GW, a/1e3, 'k', linewidth=2.)
 ax1.fill_between(f_GW, 0, 11, facecolor='Tomato', edgecolor='Tomato', alpha=0.5)
 ax1.fill_between(f_GW, 0, 12, facecolor='Tomato', edgecolor='Tomato', alpha=0.5)
 ax1.fill_between(f_GW, 0, 13, facecolor='Tomato', edgecolor='Tomato', alpha=0.5)
-ax1.annotate('neutron star radius', xy=(1500, 6), xycoords='data', size=20, ha="center", va="center",
+ax1.annotate('neutron star radius', xy=(1500, 6), xycoords='data', size=12, ha="center", va="center",
     path_effects=[PE.withStroke(linewidth=3, foreground="w")])
 ax1.set_xlim([0, 3000])
 ax1.set_ylim([0, 100])
@@ -48,17 +48,19 @@ plt.setp(ax1.get_xticklabels(), visible=False)
 
 # Plot the tidal and binding forces as a function of frequency.
 ax2 = fig.add_subplot(2, 1, 2, sharex=ax1)
-ax2.plot(f_GW, F_tide_11/1e42, 'k', linewidth=2.5, label='$R = 11$ km')
+ax2.plot(f_GW, F_tide_11/1e42, 'k', linewidth=2., label='$R = 11$ km')
 ax2.plot([0, 3000], [F_bind_11/1e42]*2, 'k')
-ax2.plot(f_GW, F_tide_12/1e42, 'k--', linewidth=2.5, label='$R = 12$ km')
+ax2.plot(f_GW, F_tide_12/1e42, 'k--', linewidth=2., label='$R = 12$ km')
 ax2.plot([0, 3000], [F_bind_12/1e42]*2, 'k--')
-ax2.plot(f_GW, F_tide_13/1e42, 'k-.', linewidth=2.5, label='$R = 13$ km')
+ax2.plot(f_GW, F_tide_13/1e42, 'k-.', linewidth=2., label='$R = 13$ km')
 ax2.plot([0, 3000], [F_bind_13/1e42]*2, 'k-.')
 ax2.set_xlim([0, 3000])
 ax2.set_xlabel('gravitational wave frequency (Hz)')
+ax2.xaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
 ax2.set_ylim([0, 10])
-ax2.set_ylabel('tidal force ($10^{42}$ N)')
-leg = ax2.legend(loc=2, fontsize=20, fancybox=True)
+ax2.set_ylabel('tidal force (10$^{\mathrm{42}}$ N)')
+ax2.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
+leg = ax2.legend(loc=2, fontsize=11, fancybox=True)
 leg.legendPatch.set_path_effects([PE.withSimplePatchShadow()])
 
 # Save the figure.
