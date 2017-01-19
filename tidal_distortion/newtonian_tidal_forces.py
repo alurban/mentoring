@@ -62,4 +62,4 @@ leg = ax2.legend(loc=2, fontsize=20, fancybox=True)
 leg.legendPatch.set_path_effects([PE.withSimplePatchShadow()])
 
 # Save the figure.
-plt.savefig('newtonian_tidal_forces.png')
+plt.savefig('newtonian_tidal_forces.pdf')
