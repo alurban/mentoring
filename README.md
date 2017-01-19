@@ -1,4 +1,3 @@
-# mentoring
 Mentoring
 =========
 
