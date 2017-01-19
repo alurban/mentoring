@@ -1,7 +1,7 @@
 Newtonian Tidal Distortion
 ==========================
 
-A working directory with tools that help illustrate and build intuition for the physical process of tidal distortion in a binary neutron star system, using nothing but Keplerian laws of motion.
+In this problem, we will bring together a couple of basic things we know about orbits and make a toy model of a binary neutron star system. The goal is to use what we understand now to inform what we’re going to do next: with nothing more than Kepler’s laws and Newton’s law of gravity, we will build an intuition for what happens just before a pair of neutron stars spiral into one another, and use those insights to strategize the next step.... of science!
 
 Contents
 --------
@@ -11,3 +11,43 @@ Contents
 * `binary_diagram.{tex,pdf}`: A LaTeX rendering of a diagram of a neutron star binary. Pretty much does what it says on the tin.
 * `matplotlibrc`: A local configuration of matplotlib settings, because I am very picky about how my plots look.
 * `Makefile`: Running `make` will produce a PDF rendering of `tidal_notes.pdf`, the notes document referred to above.
+
+Software Requirements
+---------------------
+
+* [LaTeX 2e](https://www.latex-project.org/get/)
+* pdflatex
+* [Python 2.x](https://www.python.org)
+* [NumPy](http://www.numpy.org)
+* [Matplotlib](http://matplotlib.org)
+
+Instructions
+------------
+
+To produce a plot of the orbital separation and tidal forces as a function of gravitational wave frequency:
+
+```
+python newtonian_tidal_forces.py
+```
+
+To produce a PDF rendering of a diagram of a binary neutron star system:
+
+```
+pdflatex binary_diagram
+```
+
+To produce a PDF rendering of my complete notes on this problem, with suggested solution and thinking points:
+
+```
+pdflatex -draftmode tidal_notes && \
+pdflatex -draftmode tidal_notes && \
+pdflatex tidal_notes
+```
+
+Alternatively, you can use the Makefile, which `make`s life much simpler:
+
+```
+make
+```
+
+In the words of Captain Picard, `make` it so!
