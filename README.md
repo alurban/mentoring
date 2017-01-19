@@ -32,4 +32,6 @@ Other Resources
 * [LIGO Laboratory](http://ligo.caltech.edu)
 * Online version of my [curriculum vitae](http://alurban.github.io/)
 
-Finally, if you're feeling overwhelmed, here's [a video of an adorable sloth](https://youtu.be/DkmrWY5zYbA)
+Pro tip: if your eyes hurt after staring at a computer screen all day, consider using software that adjusts your monitor's color filter to reflect indoor vs. outdoor lighting conditions, such as [f.lux](https://justgetflux.com).
+
+Finally, if you're feeling overwhelmed, here's [a video of an adorable sloth](https://youtu.be/DkmrWY5zYbA)!
