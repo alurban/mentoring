@@ -2,6 +2,7 @@
 \usepackage{charter}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{mdframed}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath}
 
@@ -33,6 +34,14 @@ Pasadena, CA 91125, USA \\
 \section*{Stable Keplerian Orbits}
 \hspace{15pt} Suppose that a neutron star binary (each with mass $M = 1.4\,\, M_{\odot}$) is in a stable, Keplerian orbit (\textit{i.e.} with no loss of energy). Figure \ref{fig:binary_diagram} illustrates this system.
 
+\begin{figure}[!h]
+\begin{mdframed}
+\centering
+\includegraphics{binary_diagram.pdf}
+\caption{\label{fig:binary_diagram}Diagram of the neutron star binary, showing its orbital separation ($a$) and the radius ($R$) and masses ($M$) of the individual neutron stars. The various mutual gravitational forces at play are also illustrated.}
+\end{mdframed}
+\end{figure}
+
 \begin{enumerate}
 
 \item Using Kepler's laws, show that when the orbit is perfectly circular, the azimuthal angle $\varphi$ is a linear function of time. (You can presume the orbit is in a plane, so $\theta = \pi/2 =$ const.)
@@ -56,13 +65,5 @@ is called the \textit{effective potential}. (Note that $L$ is conserved during a
 \item Now, combine these results with last week's. What energies and angular momenta give us stable circular orbits in the region where 30 Hz $\leq f_{\rm GW} \leq$ 3000 Hz? What does the centrifugal force on each neutron star look like in this region? How does this compare with the tidal force?
 
 \end{enumerate}
-
-\vspace{30pt}
-
-\begin{figure}[!h]
-\centering
-\includegraphics{binary_diagram.pdf}
-\caption{\label{fig:binary_diagram}Diagram of the neutron star binary, showing its orbital separation ($a$) and the radius ($R$) and masses ($M$) of the individual neutron stars. The various mutual gravitational forces at play are also illustrated.}
-\end{figure}
 
 \end{document}
