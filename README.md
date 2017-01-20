@@ -29,6 +29,7 @@ Other Resources
 * Caltech's [Center for Teaching, Learning, and Outreach](http://teachlearn.caltech.edu)
 * [A list of research facilities](https://www.caltech.edu/content/research-facilities)
 * Caltech [Student-Faculty Programs](http://sfp.caltech.edu)
+* A neat [Python tutorial](https://www.learnpython.org) with focus on data science
 * [LIGO Laboratory](http://ligo.caltech.edu)
 * Online version of my [curriculum vitae](http://alurban.github.io/)
 
