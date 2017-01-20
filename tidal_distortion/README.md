@@ -46,10 +46,11 @@ pdflatex -draftmode tidal_notes && \
 pdflatex tidal_notes
 ```
 
-Alternatively, you can use the Makefile, which `make`s life much simpler:
+and the same for notes on stable orbits. Alternatively, you can use the Makefile, which `make`s life much simpler:
 
 ```
-make
+make tidal_notes
+make stable_orbits
 ```
 
 In the words of Captain Picard, `make` it so!
