@@ -1,7 +1,7 @@
 FIGS = binary_diagram.pdf newtonian_tidal_forces.pdf
 BYPROD = *.aux *.log *.out *.dvi *.blg *.bbl *.xml *.bcf *.synctex.gz *Notes.bib
 
-all: tidal_notes.pdf
+all: tidal_notes stable_orbit
 
 %: $(FIGS) %.tex
 	pdflatex -draftmode $(@:.pdf=) && \
