@@ -53,4 +53,10 @@ make tidal_notes
 make stable_orbits
 ```
 
+To re-generate drafts of all notes:
+
+```
+make
+```
+
 In the words of Captain Picard, `make` it so!
