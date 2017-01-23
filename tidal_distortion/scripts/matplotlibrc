@@ -1,0 +1,5 @@
+backend: Agg
+text.usetex: true
+font.family: serif
+font.serif: charter
+font.size: 12.0
