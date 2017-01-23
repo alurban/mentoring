@@ -46,7 +46,7 @@ ax2.set_ylabel('orbital velocity ($c$)')
 ax2.yaxis.set_major_formatter(ticker.FormatStrFormatter("%.2g"))
 plt.setp(ax2.get_xticklabels(), visible=False)
 
-# Plot the tidal and binding forces as a function of frequency.
+# Plot the total angular momentum as a function of frequency.
 ax3 = fig.add_subplot(3, 1, 3)
 ax3.plot(f_GW, L/1e42, 'k', linewidth=2.)
 ax3.set_xlim([0, 4000])
