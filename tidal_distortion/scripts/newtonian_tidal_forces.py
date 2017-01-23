@@ -11,7 +11,7 @@ MSun = 1.989e30  # Solar mass in kg
 M = 1.4 * MSun   # Mass of each neutron star in this example
 
 # Set array of GW frequency values.
-f_GW = np.linspace(0, 3000, 500)
+f_GW = np.linspace(1e-4, 3000, 500)
 
 # For each GW frequency, compute the orbital separation in meters.
 a = ( G * (2*M) / (pi * f_GW)**2 )**(1./3)
