@@ -77,7 +77,7 @@ c = ['k--', 'CornflowerBlue', 'Red', 'Silver', 'k']
 # Plot the orbital separation as a function of time.
 ax1 = fig.add_subplot(3, 1, 1)
 for i in xrange(len(E)):
-    ax1.plot(t/Porb, np.array(a[i])/1000, c[i], linewidth=2., label='$E =$ %s$E_0$' % frac[i])
+    ax1.plot(t/Porb, np.array(a[i])/1000, c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
 ax1.fill_between(t/Porb, 0, 11, facecolor='Tomato', edgecolor='Tomato', alpha=0.5)
 ax1.fill_between(t/Porb, 0, 12, facecolor='Tomato', edgecolor='Tomato', alpha=0.5)
 ax1.fill_between(t/Porb, 0, 13, facecolor='Tomato', edgecolor='Tomato', alpha=0.5)
@@ -92,7 +92,7 @@ plt.setp(ax1.get_xticklabels(), visible=False)
 # Plot the orbital separation as a function of time.
 ax2 = fig.add_subplot(3, 1, 2)
 for i in xrange(len(E)):
-    ax2.plot(t/Porb, np.rad2deg(np.array(phi[i])), c[i], linewidth=2., label='$E =$ %s$E_0$' % frac[i])
+    ax2.plot(t/Porb, np.rad2deg(np.array(phi[i])), c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
 ax2.set_xlim([0, 3])
 ax2.set_ylim([0, 720])
 ax2.set_ylabel(r'$\varphi$ (degrees)')
@@ -104,7 +104,7 @@ leg.legendPatch.set_path_effects([PE.withSimplePatchShadow()])
 # Plot the orbital velocity as a function of time.
 ax3 = fig.add_subplot(3, 1, 3)
 for i in xrange(len(E)):
-    ax3.plot(t/Porb, np.array(v[i])/299792458., c[i], linewidth=2., label='$E =$ %s$E_0$' % frac[i])
+    ax3.plot(t/Porb, np.array(v[i])/299792458., c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
 ax3.set_xlim([0, 3])
 ax3.set_xlabel(r'$t/P_{\rm circular}$ (unitless)')
 ax3.xaxis.set_major_formatter(ticker.FormatStrFormatter("%.2g"))
@@ -125,7 +125,7 @@ ax1 = fig.add_subplot(3, 1, 1)
 ax1.plot([0, 100], [0, 0], 'k--', linewidth=0.5)
 for i in xrange(1, len(E)):
     energy = np.array([(M/4)*dadt(x, E[i], L)**2 - G*M**2/x + (L/x)**2/M for x in a[i]])
-    ax1.plot(np.array(a[i])/1000, energy/1e45, c[i], linewidth=2., label='$E =$ %s$E_0$' % frac[i])
+    ax1.plot(np.array(a[i])/1000, energy/1e45, c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
 a_plot = np.arange(1e-4, 100000, 1)
 Phi = -G * M**2 / a_plot + (L/a_plot)**2 / M
 ax1.plot(a_plot/1000, Phi/1e45, 'k', linewidth=1.5)
@@ -142,7 +142,7 @@ leg.legendPatch.set_path_effects([PE.withSimplePatchShadow()])
 ax2 = fig.add_subplot(3, 1, 2)
 for i in xrange(len(E)):
     energy = np.array([(M/4)*dadt(x, E[i], L)**2 - G*M**2/x + (L/x)**2/M for x in a[i]])
-    ax2.plot(t/Porb, energy/1e45, c[i], linewidth=2., label='$E =$ %s$E_0$' % frac[i])
+    ax2.plot(t/Porb, energy/1e45, c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
 ax2.set_xlim([0, 3])
 ax2.set_ylim([-15, 5])
 ax2.set_ylabel('total energy (10$^{45}$ J)')
@@ -153,7 +153,7 @@ plt.setp(ax2.get_xticklabels(), visible=False)
 ax3 = fig.add_subplot(3, 1, 3)
 for i in xrange(len(E)):
     ang = np.array([0.5*M*(x**2)*dphidt(x, L) for x in a[i]])
-    ax3.plot(t/Porb, ang/1e42, c[i], linewidth=2., label='$E =$ %s$E_0$' % frac[i])
+    ax3.plot(t/Porb, ang/1e42, c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
 ax3.set_xlim([0, 3])
 ax3.set_xlabel(r'$t/P_{\rm circular}$ (unitless)')
 ax3.xaxis.set_major_formatter(ticker.FormatStrFormatter("%.2g"))
@@ -172,8 +172,8 @@ fig = plt.figure( figsize=(6, 6) )
 # Plot a radial diagram of the simulated orbits.
 ax = fig.add_subplot(1, 1, 1, projection='polar')
 for i in xrange(1, len(E)-1):
-    ax.plot(phi[i], np.array(a[i])/1000, c[i], linewidth=2., label='$E =$ %s$E_0$' % frac[i])
-ax.plot(phi[0][:101], np.array(a[0][:101])/1000, c[0], linewidth=2., label='$E = E_0$')
+    ax.plot(phi[i], np.array(a[i])/1000, c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
+ax.plot(phi[0][:101], np.array(a[0][:101])/1000, c[0], linewidth=2., label='$E = E_L$')
 ax.set_rmax(80)
 ax.set_rticks([40, 60, 80])
 ax.grid(True)
