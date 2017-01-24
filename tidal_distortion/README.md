@@ -1,18 +1,21 @@
-Newtonian Tidal Distortion
-==========================
+Tidal Distortion
+================
 
 In this problem, we will bring together a couple of basic things we know about orbits and make a toy model of a binary neutron star system. With nothing more than Kepler’s laws and Newton’s law of gravity, we will build an intuition for what happens as a pair of neutron stars spiral into one another, and use those insights to design an awesome orbital simulation.... of science!
 
 Contents
 --------
 
-* `tidal_notes.{tex,pdf}`: A statement of the problem and some notes on how I solved it.
-* `newtonian_tidal_forces.{py,pdf}`: A python script and its output. The script computes orbital separation and tidal forces as a function of gravitational wave frequency.
-* `binary_diagram.{tex,pdf}`: A LaTeX rendering of a diagram of a neutron star binary. Pretty much does what it says on the tin.
-* `matplotlibrc`: A local configuration of matplotlib settings, because I am very picky about how my plots look.
-* `Makefile`: Running `make` will produce a PDF rendering of `tidal_notes.pdf`, the notes document referred to above.
+* `tidal_notes.{tex,pdf}`: The first problem set on Newtonian tidal forces, and some notes on how I solved it.
+* `stable_orbit.{tex,pdf}`: The second problem set on stable Keplerian orbits, and some notes on how I solved it.
+* `scripts/`: A directory containing Python scripts related to these notes, e.g. a script that computes orbital separation and tidal forces as a function of gravitational wave frequency.
+* `scripts/matplotlibrc`: A local configuration of matplotlib settings, because I am very picky about how my plots look.
+* `Makefile`: Running `make` will produce a PDF rendering of the notes documents referred to above.
 
-Note: all the details of this problem are captured in `tidal_notes.pdf`.
+Note: all the details of this problem are captured in `*.pdf` documents in this directory. In sequntial order, they go:
+
+1. `tidal_notes.pdf`
+2. `stable_orbit.pdf`
 
 Software Requirements
 ---------------------
@@ -29,13 +32,13 @@ Instructions
 To produce a plot of the orbital separation and tidal forces as a function of gravitational wave frequency:
 
 ```
-python newtonian_tidal_forces.py
+python scripts/newtonian_tidal_forces.py
 ```
 
 To produce a PDF rendering of a diagram of a binary neutron star system:
 
 ```
-pdflatex binary_diagram
+pdflatex scripts/binary_diagram
 ```
 
 To produce a PDF rendering of my complete notes on this problem, with suggested solution and thinking points:
