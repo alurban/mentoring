@@ -49,14 +49,16 @@ v = [[aL * dphidt(aL, L)] for x in frac]
 
 for i in xrange(len(E)):
     for j in xrange(1, len(t)):
-        # get the change in a
+        # get the change in a, which we take as initially ingoing
+        # (i.e., moving to smaller a)
         rhs_a = -dadt(a[i][j-1], E[i], L)
 
         # make sure we're going in the right direction
         if j >= 2 and a[i][j-2] < a[i][j-1]:
             rhs_a *= -1
 
-        # check that the kinetic energy is sane
+        # check that the kinetic energy is sane; if it isn't,
+        # impose a turning point
         a_proposed = euler(a[i][j-1], dt, rhs_a)
         if -G*M**2/a_proposed + (L/a_proposed)**2/M > E[i]:
             rhs_a *= -1
