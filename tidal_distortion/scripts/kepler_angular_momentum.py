@@ -19,6 +19,7 @@ f_GW = np.linspace(1e-4, 4000, 500)
 a = ( G * (2*M) / (pi * f_GW)**2 )**(1./3)
 v = ( 2 * pi * G * M * f_GW )**(1./3) / 299792458.
 L = ( G**2 * M**5 / (2 * pi * f_GW) )**(1./3)
+E = - ( G * M**(5./2) / (2 * L) )**2
 
 # Construct a figure.
 fig = plt.figure( figsize=(6, 7.5) )
@@ -49,12 +50,16 @@ plt.setp(ax2.get_xticklabels(), visible=False)
 # Plot the total angular momentum as a function of frequency.
 ax3 = fig.add_subplot(3, 1, 3)
 ax3.plot(f_GW, L/1e42, 'k', linewidth=2.)
+ax4 = ax3.twinx()
+ax4.plot(f_GW, E/1e45, 'k--', linewidth=2.)
 ax3.set_xlim([0, 4000])
 ax3.set_xlabel('gravitational wave frequency (Hz)')
 ax3.xaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
 ax3.set_ylim([0, 10])
 ax3.set_ylabel('angular momentum (10$^{42}$ J$\cdot$s)')
 ax3.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
+ax4.set_ylabel('total energy (10$^{45}$ J)')
+ax4.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
 
 # Save the figure.
 plt.savefig('kepler_angular_momentum.pdf')
