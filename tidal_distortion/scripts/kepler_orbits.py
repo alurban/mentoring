@@ -70,7 +70,7 @@ for i in xrange(len(E)):
 
 # Construct a figure showing orbital parameters.
 fig = plt.figure( figsize=(6, 7.5) )
-c = ['k--', 'CornflowerBlue', 'Red', 'LightSlateGrey', 'k']
+c = ['k--', 'CornflowerBlue', 'Red', 'Silver', 'k']
 
 # Plot the orbital separation as a function of time.
 ax1 = fig.add_subplot(3, 1, 1)
