@@ -23,7 +23,7 @@ colors = ['k--', 'k', 'CornflowerBlue', 'Red', 'DarkSlateGrey']
 # Construct a figure.
 fig = plt.figure( figsize=(6, 3.25) )
 
-# Plot the total angular momentum as a function of frequency.
+# Plot the effective potential as a function of orbital separation.
 ax = fig.add_subplot(1, 1, 1)
 ax.plot([0, 100], [0, 0], 'k--', linewidth=0.5)
 for x, y, c in zip(aL, Phi, colors):
