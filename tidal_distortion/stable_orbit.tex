@@ -90,19 +90,18 @@ is called the \textit{effective potential}. (Note that $L$ is conserved during a
 
 \begin{enumerate}
 
-\item From Kepler's first law, we know that all closed orbits are elliptical in shape. For those orbits that are perfectly circular, this means the orbital separation $a =$ constant. Kepler's second law then tells us that a line connecting the two bodies sweeps out equal areas in equal times; when the orbit is perfectly circular, this must imply that $\omega = d\varphi/dt =$ constant since $\varphi$ is the only coordinate changing over time. It follows that
+\item From Kepler's first law, we know that all closed orbits are elliptical in shape. For those orbits that are perfectly circular, this means the orbital separation $a =$ constant. Kepler's second law then tells us that a line connecting the two bodies sweeps out equal areas in equal times; when the orbit is perfectly circular, this must imply that $\omega = d\varphi/dt =$ constant since $\varphi$ is the only coordinate changing over time. It follows that \textbf{during circular orbits},
 \begin{equation}
 \varphi(t) = \omega t + \varphi_0
 \end{equation}
 where $\omega = 2\pi f_{\rm orbital}$ and $\varphi_0$ are constants, as desired.
 
-\item As seen in Figure \ref{fig:binary_diagram}, the gravitational force affects a total relative acceleration \[ \frac{d^2\mathbf{a}}{dt^2} = \frac{\mathbf{F}_{\rm 21}}{M} - \frac{\mathbf{F}_{\rm 12}}{M} = \frac{2}{M}\,\mathbf{F}_{\rm g} \] where $\mathbf{F}_{\rm g}$ is the (mutual) gravitational force of one neutron star on the other and $\mathbf{a}$ is the separation vector between them. Since gravitation is a central force, the relative acceleration must be purely radial; that is, there can be no angular component of acceleration on one star relative to the other. Since we already presumed orbital motion is planar (why?) this must mean that the $\varphi$ component of acceleration vanishes, so that \[ 2a\,\frac{da}{dt}\,\frac{d\varphi}{dt} + a^2\,\frac{d^2\varphi}{dt^2} = \frac{d}{dt} \left( a^2\,\frac{d\varphi}{dt} \right) = 0. \]
-The term in parentheses is $a$ times the perpendicular component of velocity, which you might remember as the specific angular momentum of one neutron star:
-The orbital angular momentum $L$ of one neutron star is defined as
+\item As seen in Figure \ref{fig:binary_diagram}, the gravitational force affects a total relative acceleration \[ \frac{d^2\mathbf{a}}{dt^2} = \frac{\mathbf{F}_{\rm 21}}{M} - \frac{\mathbf{F}_{\rm 12}}{M} = \frac{2}{M}\,\mathbf{F}_{\rm g} \] where $\mathbf{F}_{\rm g}$ is the (mutual) gravitational force of one neutron star on the other and $\mathbf{a}$ is the separation vector between them. Since gravitation is a central force, the relative acceleration must be purely radial; that is, there can be no angular component of acceleration on one star relative to the other. Since we already presumed orbital motion is planar (why?) this must mean that the $\varphi$ component of acceleration vanishes, so there can be no net torque: \[ 2a\,\frac{da}{dt}\,\frac{d\varphi}{dt} + a^2\,\frac{d^2\varphi}{dt^2} = \frac{d}{dt} \left( a^2\,\frac{d\varphi}{dt} \right) = 0. \]
+The term in parentheses is $a$ times the perpendicular component of velocity, which you might remember as the orbital angular momentum $L$ of one neutron star,
 \begin{equation}
-\frac{2L}{M} = \vert \mathbf{a} \times \mathbf{v} \vert = a^2\,\frac{d\varphi}{dt}
+\frac{2}{M}\, \mathbf{L} = \mathbf{a} \times \mathbf{v} = a^2\,\frac{d\varphi}{dt} \, \hat{\mathbf{z}},
 \end{equation}
-where $\mathbf{v}$ is the instantaneous linear velocity of one star relative to the other. This statement can be interpreted as saying that \textit{orbital angular momentum is conserved} during a Keplerian orbit.
+where $\mathbf{v}$ is the instantaneous linear velocity of one star relative to the other and $\hat{\mathbf{z}}$ is a unit vector perpendicular to the orbital plane. This statement can be interpreted as saying that \textbf{orbital angular momentum is conserved} during a generic Keplerian orbit.
 
 \hspace{15pt} Recall that during circular orbits, the gravitational wave frequency is twice the orbital frequency ($f_{\rm GW} = 2f_{\rm orbital}$). Since $\omega = 2\pi f_{\rm orbital} = \pi f_{\rm GW}$ by definition, and since we know
 \begin{equation}
@@ -147,11 +146,11 @@ E_L = -\frac{GM^2}{2a_L} = - \left( \frac{GM^{5/2}}{2L} \right)^2
 
 \hspace{15pt} The last term in the effective potential looks like $L^2/Ma^2$, which can loosely be thought of as summoning a central force
 \begin{equation}
-\mathbf{F}_{\rm c}(a; L) = -\frac{\partial\Phi}{\partial a} \, \hat{r} = \frac{2L^2}{Ma^3} \, \hat{r}
+\mathbf{F}_{\rm c}(a; L) = -\frac{\partial\Phi}{\partial a} \, \hat{\mathbf{a}} = \frac{2L^2}{Ma^3} \, \hat{\mathbf{a}}
 \end{equation}
-pushing outward against each neutron star. This is a \textit{centrifugal force} caused by angular motion that balances the radial pull of gravity and creates an effective 1-dimensional potential barrier at $a \ll a_L$, so that \emph{all} orbits (both open and closed) have an inner turning point. \textbf{Remember this, because we will revisit it when we add in the effects of general relativity.} The magnitude of orbital centrifugal force as a function of $f_{\rm GW}$ is visualized in Figure \ref{fig:forces}.
+pushing outward against each neutron star. (Here $\hat{\mathbf{a}} = \mathbf{a}/a$.) This is a \textit{centrifugal force} caused by angular motion that balances the radial pull of gravity and creates an effective 1-dimensional potential barrier at $a < a_L$, so that \emph{all} orbits (both open and closed) have an inner turning point. \textbf{Remember this, because we will revisit it when we add in the effects of general relativity.} The magnitude of orbital centrifugal force as a function of $f_{\rm GW}$ is visualized in Figure \ref{fig:forces}.
 
-\hspace{15pt} Always remember that the centrifugal term in $\Phi$ is really a form of kinetic energy, and that the centrifugal force is an artifact of non-inertial motion.
+\hspace{15pt} Always remember that the centrifugal term in $\Phi$ is really a form of kinetic energy, and that the centrifugal ``force'' is an artifact of non-inertial motion.
 
 \begin{figure}[!h]
 \centering
@@ -209,7 +208,7 @@ We can get around both of these issues by wisely applying the physical intuition
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=1]{stable_orbit/orbit_parameters.pdf}
-\caption{\label{fig:simulated_parameters} Features of each simulated orbit as approximated by Euler's method. Top: orbital separation, with the radius of the other neutron star shown for reference. Middle: the polar angle $\varphi(t)$. Bottom: instantaneous orbital velocity expressed as a fraction of the speed of light.}
+\caption{\label{fig:simulated_parameters} Features of each simulated orbit as approximated by Euler's method. Top: orbital separation, with the radius of the other neutron star shown for reference. Note the orbit with $E=$ 0.99$E_L$ looks like a sinusoid in $a$ with about the same period as $P_{\rm circular}$ -- this is no accident. (Can you think of why?) Middle: the polar angle $\varphi(t)$. Bottom: instantaneous orbital velocity expressed as a fraction of the speed of light.}
 \end{figure}
 
 \begin{figure}[!h]
@@ -221,7 +220,7 @@ We can get around both of these issues by wisely applying the physical intuition
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=1]{stable_orbit/orbit_diagram.pdf}
-\caption{\label{fig:trace} Traces of the four closed orbits I simulated on a polar diagram. Note that when you use too high a step size during elliptical orbits, the perihelion advances clockwise around the orbital plane. This is unphysical behavior that is actually impossible in Keplerian orbits. The circular orbit is at a radius $a_L \approx 20$ km.}
+\caption{\label{fig:trace} Traces of the four closed orbits I simulated on a polar diagram. The circular orbit is at a radius $a_L \approx 20$ km. (Note that when you use too high a step size during elliptical orbits, the perihelion advances clockwise around the orbital plane -- this is unphysical behavior that is actually impossible in Keplerian orbits.)}
 \end{figure}
 
 \begin{figure}[!h]

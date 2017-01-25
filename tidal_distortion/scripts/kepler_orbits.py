@@ -37,15 +37,15 @@ aL = 2 * L**2 / (G * M**3)  # initial separation in m
 Porb = (pi * M * aL**2) / L  # period of a stable circular orbit
 dt = Porb / 50000.  # step size, determined as 0.005% of Porb
 t = np.arange(0, 15*1.01*Porb, dt)  # sample times
-E0 = -(G * M**(5./2) / (2 * L))**2  # total energy of a stable circular orbit
-frac = np.array([1, 0.975, 0.8, 0.5, 0])
-E = frac * E0  # try orbits with these energies
+EL = -(G * M**(5./2) / (2 * L))**2  # total energy of a stable circular orbit
+frac = np.array([1, 0.99, 0.8, 0.5, 0])
+E = frac * EL  # try orbits with these energies
 
 
 # Perform the numerical simulation.
 a = [[aL] for x in frac]
 phi = [[0] for x in frac]
-v = [[aL * dphidt(aL, L)] for x in frac]
+v = [[np.sqrt( dadt(aL, x*EL, L)**2 + (aL*dphidt(aL, L))**2 )] for x in frac]
 
 for i in xrange(len(E)):
     for j in xrange(1, len(t)):
@@ -75,12 +75,15 @@ fig = plt.figure( figsize=(6, 7.5) )
 c = ['k--', 'CornflowerBlue', 'Red', 'Silver', 'k']
 
 # Plot the orbital separation as a function of time.
+# Because we used such a small step size, we will use slicing to reduce
+# the number of data points by a factor of 500 (and thus keep the PDF
+# renderings to a manageable size.
 ax1 = fig.add_subplot(3, 1, 1)
 for i in xrange(len(E)):
-    ax1.plot(t/Porb, np.array(a[i])/1000, c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
-ax1.fill_between(t/Porb, 0, 11, facecolor='Tomato', edgecolor='Tomato', alpha=0.5)
-ax1.fill_between(t/Porb, 0, 12, facecolor='Tomato', edgecolor='Tomato', alpha=0.5)
-ax1.fill_between(t/Porb, 0, 13, facecolor='Tomato', edgecolor='Tomato', alpha=0.5)
+    ax1.plot(t[::500]/Porb, np.array(a[i][::500])/1000, c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
+ax1.fill_between(t[::500]/Porb, 0, 11, facecolor='Tomato', edgecolor='Tomato', alpha=0.5)
+ax1.fill_between(t[::500]/Porb, 0, 12, facecolor='Tomato', edgecolor='Tomato', alpha=0.5)
+ax1.fill_between(t[::500]/Porb, 0, 13, facecolor='Tomato', edgecolor='Tomato', alpha=0.5)
 ax1.annotate('neutron star radius', xy=(1.5, 6), xycoords='data', size=12, ha="center", va="center",
     path_effects=[PE.withStroke(linewidth=3, foreground="w")])
 ax1.set_xlim([0, 3])
@@ -92,7 +95,7 @@ plt.setp(ax1.get_xticklabels(), visible=False)
 # Plot the orbital separation as a function of time.
 ax2 = fig.add_subplot(3, 1, 2)
 for i in xrange(len(E)):
-    ax2.plot(t/Porb, np.rad2deg(np.array(phi[i])), c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
+    ax2.plot(t[::500]/Porb, np.rad2deg(np.array(phi[i][::500])), c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
 ax2.set_xlim([0, 3])
 ax2.set_ylim([0, 720])
 ax2.set_ylabel(r'$\varphi$ (degrees)')
@@ -104,7 +107,7 @@ leg.legendPatch.set_path_effects([PE.withSimplePatchShadow()])
 # Plot the orbital velocity as a function of time.
 ax3 = fig.add_subplot(3, 1, 3)
 for i in xrange(len(E)):
-    ax3.plot(t/Porb, np.array(v[i])/299792458., c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
+    ax3.plot(t[::500]/Porb, np.array(v[i][::500])/299792458., c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
 ax3.set_xlim([0, 3])
 ax3.set_xlabel(r'$t/P_{\rm circular}$ (unitless)')
 ax3.xaxis.set_major_formatter(ticker.FormatStrFormatter("%.2g"))
@@ -125,10 +128,10 @@ ax1 = fig.add_subplot(3, 1, 1)
 ax1.plot([0, 100], [0, 0], 'k--', linewidth=0.5)
 for i in xrange(1, len(E)):
     energy = np.array([(M/4)*dadt(x, E[i], L)**2 - G*M**2/x + (L/x)**2/M for x in a[i]])
-    ax1.plot(np.array(a[i])/1000, energy/1e45, c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
-a_plot = np.arange(1e-4, 100000, 1)
+    ax1.plot(np.array(a[i][::500])/1000, energy[::500]/1e45, c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
+a_plot = np.arange(1e-4, 100000, 100)
 Phi = -G * M**2 / a_plot + (L/a_plot)**2 / M
-ax1.plot(a_plot/1000, Phi/1e45, 'k', linewidth=1.5)
+ax1.plot(a_plot/1000, Phi/1e45, 'k-.', linewidth=1.5)
 ax1.set_xlim([0, 100])
 ax1.set_xlabel('orbital separation (km)')
 ax1.xaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
@@ -142,7 +145,7 @@ leg.legendPatch.set_path_effects([PE.withSimplePatchShadow()])
 ax2 = fig.add_subplot(3, 1, 2)
 for i in xrange(len(E)):
     energy = np.array([(M/4)*dadt(x, E[i], L)**2 - G*M**2/x + (L/x)**2/M for x in a[i]])
-    ax2.plot(t/Porb, energy/1e45, c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
+    ax2.plot(t[::500]/Porb, energy[::500]/1e45, c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
 ax2.set_xlim([0, 3])
 ax2.set_ylim([-15, 5])
 ax2.set_ylabel('total energy (10$^{45}$ J)')
@@ -153,7 +156,7 @@ plt.setp(ax2.get_xticklabels(), visible=False)
 ax3 = fig.add_subplot(3, 1, 3)
 for i in xrange(len(E)):
     ang = np.array([0.5*M*(x**2)*dphidt(x, L) for x in a[i]])
-    ax3.plot(t/Porb, ang/1e42, c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
+    ax3.plot(t[::500]/Porb, ang[::500]/1e42, c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
 ax3.set_xlim([0, 3])
 ax3.set_xlabel(r'$t/P_{\rm circular}$ (unitless)')
 ax3.xaxis.set_major_formatter(ticker.FormatStrFormatter("%.2g"))
@@ -172,8 +175,8 @@ fig = plt.figure( figsize=(6, 6) )
 # Plot a radial diagram of the simulated orbits.
 ax = fig.add_subplot(1, 1, 1, projection='polar')
 for i in xrange(1, len(E)-1):
-    ax.plot(phi[i], np.array(a[i])/1000, c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
-ax.plot(phi[0][:50001], np.array(a[0][:50001])/1000, c[0], linewidth=2., label='$E = E_L$')
+    ax.plot(phi[i][::500], np.array(a[i][::500])/1000, c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
+ax.plot(phi[0][:50001:500], np.array(a[0][:50001:500])/1000, c[0], linewidth=2., label='$E = E_L$')
 ax.set_rmax(80)
 ax.set_rticks([40, 60, 80])
 ax.grid(True)
@@ -194,8 +197,8 @@ fig = plt.figure( figsize=(6, 6) )
 # Plot a radial diagram of the simulated orbits.
 ax = fig.add_subplot(1, 1, 1, projection='polar')
 for i in xrange(1, len(E)-1):
-    ax.plot(phi[i], np.array(a[i])/1000, c[i], linewidth=0.5)
-ax.plot(phi[-1], np.array(a[-1])/1000, c[-1], linewidth=2., label='$E = 0$')
+    ax.plot(phi[i][::500], np.array(a[i][::500])/1000, c[i], linewidth=0.5)
+ax.plot(phi[-1][::500], np.array(a[-1][::500])/1000, c[-1], linewidth=2., label='$E = 0$')
 ax.set_rmax(800)
 ax.set_rticks([200, 400, 600, 800])
 ax.grid(True)
