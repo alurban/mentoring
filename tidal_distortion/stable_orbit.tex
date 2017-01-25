@@ -36,13 +36,17 @@ Pasadena, CA 91125, USA \\
 \section*{Stable Keplerian Orbits}
 \hspace{15pt} Suppose that a neutron star binary (each with mass $M = 1.4\,\, M_{\odot}$) is in a stable, Keplerian orbit (\textit{i.e.} with no loss of energy). Figure \ref{fig:binary_diagram} illustrates this system.
 
+\vspace{30pt}
+
 \begin{figure}[!h]
 \begin{mdframed}
 \centering
 \includegraphics{stable_orbit/binary_diagram.pdf}
-\caption{\label{fig:binary_diagram}Diagram of the neutron star binary, showing its orbital separation ($a$) and the radius ($R$) and masses ($M$) of the individual neutron stars. The various mutual gravitational forces at play are also illustrated.}
+\caption{\label{fig:binary_diagram}Diagram of the neutron star binary, showing its orbital separation vector ($\mathbf{a}$) and the radius ($R$) and masses ($M$) of the individual neutron stars. The azimuthal angle $\varphi$ is also indicated. Note, this orbit will stay confined to the $xy$-plane.}
 \end{mdframed}
 \end{figure}
+
+\vspace{1000pt}
 
 \begin{enumerate}
 
@@ -96,8 +100,8 @@ is called the \textit{effective potential}. (Note that $L$ is conserved during a
 \end{equation}
 where $\omega = 2\pi f_{\rm orbital}$ and $\varphi_0$ are constants, as desired.
 
-\item As seen in Figure \ref{fig:binary_diagram}, the gravitational force affects a total relative acceleration \[ \frac{d^2\mathbf{a}}{dt^2} = \frac{\mathbf{F}_{\rm 21}}{M} - \frac{\mathbf{F}_{\rm 12}}{M} = \frac{2}{M}\,\mathbf{F}_{\rm g} \] where $\mathbf{F}_{\rm g}$ is the (mutual) gravitational force of one neutron star on the other and $\mathbf{a}$ is the separation vector between them. Since gravitation is a central force, the relative acceleration must be purely radial; that is, there can be no angular component of acceleration on one star relative to the other. Since we already presumed orbital motion is planar (why?) this must mean that the $\varphi$ component of acceleration vanishes, so there can be no net torque: \[ 2a\,\frac{da}{dt}\,\frac{d\varphi}{dt} + a^2\,\frac{d^2\varphi}{dt^2} = \frac{d}{dt} \left( a^2\,\frac{d\varphi}{dt} \right) = 0. \]
-The term in parentheses is $a$ times the perpendicular component of velocity, which you might remember as the orbital angular momentum $L$ of one neutron star,
+\item As seen in Figure \ref{fig:binary_diagram}, the gravitational force affects a total relative acceleration \[ \frac{d^2\mathbf{a}}{dt^2} = \frac{\mathbf{F}_{\rm 21}}{M} - \frac{\mathbf{F}_{\rm 12}}{M} = \frac{2}{M}\,\mathbf{F}_{\rm g} \] where $\mathbf{F}_{\rm g}$ is the (mutual) gravitational force of one neutron star on the other and $\mathbf{a}$ is the separation vector between them. Since gravitation is a central force, the relative acceleration must be purely radial; that is, there can be no angular component of acceleration on one star relative to the other. We've already assumed all motion is confined to a plane (why?), so this must mean the $\varphi$ component of acceleration vanishes, \textit{i.e.} there can be no net torque: \[ \frac{2}{M}\,\vert\mathbf{a}\times\mathbf{F}_{\rm g}\vert = 2a\,\frac{da}{dt}\,\frac{d\varphi}{dt} + a^2\,\frac{d^2\varphi}{dt^2} = \frac{d}{dt} \left( a^2\,\frac{d\varphi}{dt} \right) = 0. \]
+The term in parentheses is $a$ times the perpendicular component of velocity, which you might recognize as the orbital angular momentum $L$ of one neutron star,
 \begin{equation}
 \frac{2}{M}\, \mathbf{L} = \mathbf{a} \times \mathbf{v} = a^2\,\frac{d\varphi}{dt} \, \hat{\mathbf{z}},
 \end{equation}
