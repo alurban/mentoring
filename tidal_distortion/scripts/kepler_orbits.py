@@ -35,7 +35,7 @@ def euler(y, h, rhs):
 L = 4e42  # angular momentum in J*s
 aL = 2 * L**2 / (G * M**3)  # initial separation in m
 Porb = (pi * M * aL**2) / L  # period of a stable circular orbit
-dt = Porb / 100.  # step size, determined as 1% of Porb
+dt = Porb / 50000.  # step size, determined as 0.005% of Porb
 t = np.arange(0, 15*1.01*Porb, dt)  # sample times
 E0 = -(G * M**(5./2) / (2 * L))**2  # total energy of a stable circular orbit
 frac = np.array([1, 0.975, 0.8, 0.5, 0])
@@ -173,7 +173,7 @@ fig = plt.figure( figsize=(6, 6) )
 ax = fig.add_subplot(1, 1, 1, projection='polar')
 for i in xrange(1, len(E)-1):
     ax.plot(phi[i], np.array(a[i])/1000, c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
-ax.plot(phi[0][:101], np.array(a[0][:101])/1000, c[0], linewidth=2., label='$E = E_L$')
+ax.plot(phi[0][:50001], np.array(a[0][:50001])/1000, c[0], linewidth=2., label='$E = E_L$')
 ax.set_rmax(80)
 ax.set_rticks([40, 60, 80])
 ax.grid(True)

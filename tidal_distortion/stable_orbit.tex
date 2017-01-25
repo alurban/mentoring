@@ -177,7 +177,7 @@ A unique orbit for one of the neutron stars is completely specified by starting 
 \end{enumerate}
 We can get around both of these issues by wisely applying the physical intuition we've been developing in the past couple of weeks.
 
-\hspace{15pt}I have an example simulation \href{https://github.com/alurban/mentoring/blob/master/tidal_distortion/scripts/kepler_orbits.py}{in GitHub}, which I wrote in Python. I used a fixed angular momentum of $L=$ 4$\times$10$^{42}$ J$\cdot$s, a range of total energies between 0 and $E_L$ (Eq. \ref{eq:energy}), and initial values $a(t_0) = a_L$ (Eq. \ref{eq:aL}) and $\varphi(t_0) = 0$. For each orbit, I used a step size equal to 1\% of $P_{\rm circular}$ (the period we expect for stable circular orbits), and chose the initial velocity to be negative (\textit{i.e.} falling toward the other neutron star). I then followed each orbit for 15$P_{\rm circular}$. The results are shown in Figures \ref{fig:simulated_parameters}, \ref{fig:sanity_checks}, \ref{fig:trace}, and \ref{fig:trace_unbound}. We will pour through each of these results together in great detail, but in the meantime, you should look at them closely on your own.
+\hspace{15pt}I have an example simulation \href{https://github.com/alurban/mentoring/blob/master/tidal_distortion/scripts/kepler_orbits.py}{in GitHub}, which I wrote in Python. I used a fixed angular momentum of $L=$ 4$\times$10$^{42}$ J$\cdot$s, a range of total energies between 0 and $E_L$ (Eq. \ref{eq:energy}), and initial values $a(t_0) = a_L$ (Eq. \ref{eq:aL}) and $\varphi(t_0) = 0$. For each orbit, I used a step size equal to 0.005\% of $P_{\rm circular}$ (the period we expect for stable circular orbits), and chose the initial velocity to be negative (\textit{i.e.} falling toward the other neutron star). I then followed each orbit for 15$P_{\rm circular}$. The results are shown in Figures \ref{fig:simulated_parameters}, \ref{fig:sanity_checks}, \ref{fig:trace}, and \ref{fig:trace_unbound}. We will pour through each of these results together in great detail, but in the meantime, you should look at them closely on your own.
 
 \end{enumerate}
 
@@ -221,7 +221,7 @@ We can get around both of these issues by wisely applying the physical intuition
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=1]{stable_orbit/orbit_diagram.pdf}
-\caption{\label{fig:trace} Traces of the four closed orbits I simulated on a polar diagram. Note that during the elliptical orbits, the perihelion advances clockwise around the orbital plane. The circular orbit is at a radius $a_L \approx 20$ km.}
+\caption{\label{fig:trace} Traces of the four closed orbits I simulated on a polar diagram. Note that when you use too high a step size during elliptical orbits, the perihelion advances clockwise around the orbital plane. This is unphysical behavior that is actually impossible in Keplerian orbits. The circular orbit is at a radius $a_L \approx 20$ km.}
 \end{figure}
 
 \begin{figure}[!h]
