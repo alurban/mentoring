@@ -5,6 +5,13 @@ import matplotlib.pyplot as plt
 import matplotlib.patheffects as PE
 from matplotlib import ticker
 
+# The jr-tools package can be downloaded and
+# installed from: https://github.com/kingjr/jr-tools
+try:
+    from jr.gif.Figtodat import fig2img
+    from jr.gif.images2gif import writeGif
+except:
+    print "Couldn't find gif-making packages; continuing without gifs."
 
 # Physical constants.
 G = 6.67408e-11  # Newton's constant in m^3 / kg / s
@@ -97,12 +104,11 @@ ax2 = fig.add_subplot(3, 1, 2)
 for i in xrange(len(E)):
     ax2.plot(t[::500]/Porb, np.rad2deg(np.array(phi[i][::500])), c[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
 ax2.set_xlim([0, 5])
-ax2.set_ylim([0, 720])
+ax2.set_ylim([0, 1800])
 ax2.set_ylabel(r'$\varphi$ (degrees)')
 ax2.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
 plt.setp(ax2.get_xticklabels(), visible=False)
 leg = ax2.legend(loc=2, fontsize=10, fancybox=True)
-leg.legendPatch.set_path_effects([PE.withSimplePatchShadow()])
 
 # Plot the orbital velocity as a function of time.
 ax3 = fig.add_subplot(3, 1, 3)
@@ -139,7 +145,6 @@ ax1.set_ylim([-15, 10])
 ax1.set_ylabel('energy (10$^{45}$ J)')
 ax1.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
 leg = ax1.legend(loc=1, fontsize=10, fancybox=True)
-leg.legendPatch.set_path_effects([PE.withSimplePatchShadow()])
 
 # Plot the simulated energies as a function of time.
 ax2 = fig.add_subplot(3, 1, 2)
@@ -187,7 +192,6 @@ ax.set_xticklabels(['0$^{\circ}$', '45$^{\circ}$', '90$^{\circ}$', '135$^{\circ}
     '225$^{\circ}$', '270$^{\circ}$', '315$^{\circ}$'])
 ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
 leg = ax.legend(loc=1, fontsize=10, fancybox=True)
-leg.legendPatch.set_path_effects([PE.withSimplePatchShadow()])
 
 # Save the figure.
 fig.tight_layout()
@@ -212,8 +216,30 @@ ax.set_xticklabels(['0$^{\circ}$', '45$^{\circ}$', '90$^{\circ}$', '135$^{\circ}
     '225$^{\circ}$', '270$^{\circ}$', '315$^{\circ}$'])
 ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
 leg = ax.legend(loc=1, fontsize=10, fancybox=True)
-leg.legendPatch.set_path_effects([PE.withSimplePatchShadow()])
 
 # Save the figure.
 fig.tight_layout()
 plt.savefig('orbit_diagram_unbound.pdf')
+
+
+# Finally, write a gif for each closed orbit.
+try:
+    for i in xrange(len(E)-1):
+        fig = plt.figure( figsize=(6, 6) )
+        ax = fig.add_subplot(1, 1, 1, projection='polar')
+        images = []
+        for j in xrange(len(t[:stop[i]:2000])):
+            ax.scatter(phi[i][2000*j], a[i][2000*j]/2000, c='Tomato', s=300, edgecolors='none')
+            ax.scatter(phi[i][2000*j] + pi, a[i][2000*j]/2000, c='Tomato', s=300, edgecolors='none')
+            ax.set_rmax(40)
+            ax.set_rticks([10, 20, 30, 40])
+            ax.grid(True)
+            ax.set_xticklabels(['0$^{\circ}$', '45$^{\circ}$', '90$^{\circ}$', '135$^{\circ}$', '180$^{\circ}$',
+                '225$^{\circ}$', '270$^{\circ}$', '315$^{\circ}$'])
+            ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
+            ax.set_title('$E =$ %s$E_L$' % frac[i])
+            images.append( fig2img(fig) )
+            ax.clear()
+        writeGif('orbit_%s.gif' % (i+1), images, duration=2./len(images), dither=1)
+except:
+    import sys; sys.exit(0)
