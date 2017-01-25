@@ -36,13 +36,13 @@ Pasadena, CA 91125, USA \\
 \section*{Stable Keplerian Orbits}
 \hspace{15pt} Suppose that a neutron star binary (each with mass $M = 1.4\,\, M_{\odot}$) is in a stable, Keplerian orbit (\textit{i.e.} with no loss of energy). Figure \ref{fig:binary_diagram} illustrates this system.
 
-\vspace{30pt}
+\vspace{20pt}
 
 \begin{figure}[!h]
 \begin{mdframed}
 \centering
 \includegraphics{stable_orbit/binary_diagram.pdf}
-\caption{\label{fig:binary_diagram}Diagram of the neutron star binary, showing its orbital separation vector ($\mathbf{a}$) and the radius ($R$) and masses ($M$) of the individual neutron stars. The azimuthal angle $\varphi$ is also indicated. Note, this orbit will stay confined to the $xy$-plane.}
+\caption{\label{fig:binary_diagram}Diagram of the neutron star binary in the center of mass reference frame, showing its orbital separation vector ($\mathbf{a}$) and the radius ($R$) and masses ($M$) of the individual neutron stars. The azimuthal angle $\varphi$ is also indicated. Note, because this is an equal-mass binary the center of mass is at the exact midpoint ($a$/2) between the stars. Furthermore, all orbital motion will stay confined to the $xy$-plane.}
 \end{mdframed}
 \end{figure}
 
@@ -58,7 +58,7 @@ Pasadena, CA 91125, USA \\
 \begin{equation}
 E = \frac{M}{4}\left(\frac{da}{dt}\right)^2 + \Phi(a; L)
 \end{equation}
-where the function
+in a reference frame with the center of mass at rest, where the function
 \begin{equation}\label{eq:effective_potential}
 \Phi(a; L) = - \frac{GM^2}{a} + \frac{L^2}{Ma^2}
 \end{equation}
@@ -100,12 +100,12 @@ is called the \textit{effective potential}. (Note that $L$ is conserved during a
 \end{equation}
 where $\omega = 2\pi f_{\rm orbital}$ and $\varphi_0$ are constants, as desired.
 
-\item As seen in Figure \ref{fig:binary_diagram}, the gravitational force affects a total relative acceleration \[ \frac{d^2\mathbf{a}}{dt^2} = \frac{\mathbf{F}_{\rm 21}}{M} - \frac{\mathbf{F}_{\rm 12}}{M} = \frac{2}{M}\,\mathbf{F}_{\rm g} \] where $\mathbf{F}_{\rm g}$ is the (mutual) gravitational force of one neutron star on the other and $\mathbf{a}$ is the separation vector between them. Since gravitation is a central force, the relative acceleration must be purely radial; that is, there can be no angular component of acceleration on one star relative to the other. We've already assumed all motion is confined to a plane (why?), so this must mean the $\varphi$ component of acceleration vanishes, \textit{i.e.} there can be no net torque: \[ \frac{2}{M}\,\vert\mathbf{a}\times\mathbf{F}_{\rm g}\vert = 2a\,\frac{da}{dt}\,\frac{d\varphi}{dt} + a^2\,\frac{d^2\varphi}{dt^2} = \frac{d}{dt} \left( a^2\,\frac{d\varphi}{dt} \right) = 0. \]
-The term in parentheses is $a$ times the perpendicular component of velocity, which you might recognize as the orbital angular momentum $L$ of one neutron star,
+\item As seen in Figure \ref{fig:binary_diagram}, the gravitational force affects a total relative acceleration \[ \frac{d^2\mathbf{a}}{dt^2} = \frac{\mathbf{F}_{\rm 21}}{M} - \frac{\mathbf{F}_{\rm 12}}{M} = \frac{2}{M}\,\mathbf{F}_{\rm g} \] where $\mathbf{F}_{\rm g}$ is the (mutual) gravitational force of one neutron star on the other and $\mathbf{a}$ is the separation vector between them. Since gravity is a central force, the relative acceleration must be purely radial; that is, there can be no angular component of acceleration on either star relative to the center of mass (or \textit{barycenter}, which is at rest exactly midway between the stars). We've already assumed all motion is confined to a plane (why?), so this must mean the $\varphi$ component of acceleration vanishes, \textit{i.e.} there can be no net torque: \[ \frac{2}{M}\,\vert\mathbf{a}\times\mathbf{F}_{\rm g}\vert = 2a\,\frac{da}{dt}\,\frac{d\varphi}{dt} + a^2\,\frac{d^2\varphi}{dt^2} = \frac{d}{dt} \left( a^2\,\frac{d\varphi}{dt} \right) = 0. \]
+The term in parentheses is $a$ times the perpendicular component of velocity, which you might recognize as the total angular momentum per unit mass
 \begin{equation}
 \frac{2}{M}\, \mathbf{L} = \mathbf{a} \times \mathbf{v} = a^2\,\frac{d\varphi}{dt} \, \hat{\mathbf{z}},
 \end{equation}
-where $\mathbf{v}$ is the instantaneous linear velocity of one star relative to the other and $\hat{\mathbf{z}}$ is a unit vector perpendicular to the orbital plane. This statement can be interpreted as saying that \textbf{orbital angular momentum is conserved} during a generic Keplerian orbit.
+where $\mathbf{v}$ is the instantaneous linear velocity of one star relative to the barycenter and $\hat{\mathbf{z}}$ is a unit vector perpendicular to the orbital plane. This statement can be interpreted as saying that \textbf{orbital angular momentum is conserved} during a generic Keplerian orbit.
 
 \hspace{15pt} Recall that during circular orbits, the gravitational wave frequency is twice the orbital frequency ($f_{\rm GW} = 2f_{\rm orbital}$). Since $\omega = 2\pi f_{\rm orbital} = \pi f_{\rm GW}$ by definition, and since we know
 \begin{equation}
@@ -127,11 +127,11 @@ during stable circular orbits. These quantities are plotted in Figure \ref{fig:L
 \caption{\label{fig:L} Various features of circular Keplerian orbits expressed as a function of the gravitational wave frequency. Top: orbital separation; \textit{i.e.} the distance between neutron star cores. Middle: orbital velocity, expressed as a fraction of the speed of light, $c$. (Note the incredibly extreme speeds attained by neutron stars in LIGO's sensitive frequency band.) Bottom: orbital angular momentum (solid) and total energy (dashed; see Eq. \ref{eq:energy}), which once again is quite extreme.}
 \end{figure}
 
-\item To make the problem simpler we can write down the total energy of one neutron star relative to the other, thinking in terms of the total mass $M_{\rm tot} = 2M$ and the ``reduced'' mass $\mu = M/2$ as in question (2) above. Because of the symmetry of the system we know that the center of mass lives exactly midway between the two neutron stars at all times, meaning a particle at the center of mass has no kinetic energy. Thus, the total energy of an equivalent one-body system is \[ E = \frac{\mu}{2} \left[ \left(\frac{da}{dt}\right)^2 + a^2\omega^2 \right] - \frac{GM^2}{a}. \] But, we also know that the total angular momentum $L = \mu a^2\omega$ is conserved during a given orbit, so we can re-write the total energy in terms of $a$, its derivative, and $L$:
+\item To make the problem simpler we can write down the total energy of one neutron star relative to the other, thinking in terms of the total mass $M_{\rm tot} = 2M$ and the ``reduced'' mass $\mu = M/2$ as in question (2) above. Because of the symmetry of the system we know that the barycenter lives exactly midway between the two neutron stars at all times, meaning a particle at rest there has no kinetic energy in the center of mass frame. Thus, the total energy of an equivalent one-body system is \[ E = \frac{\mu}{2} \left[ \left(\frac{da}{dt}\right)^2 + a^2\omega^2 \right] - \frac{GM^2}{a}. \] But, we also know that each star's angular momentum $L = \mu a^2\omega$ is conserved during a given orbit, so we can re-write the total energy in terms of $a$, its derivative, and $L$:
 \begin{equation}
-E = \frac{M}{4}\left(\frac{da}{dt}\right)^2 - \frac{GM^2}{a} + \frac{L^2}{Ma^2}
+E = \frac{M}{4}\left(\frac{da}{dt}\right)^2 - \frac{GM^2}{a} + \frac{L^2}{Ma^2}.
 \end{equation}
-as we set out to show. (The last two terms constitute the effective potential in Eq. \ref{eq:effective_potential}.) Note, because of Newton's third law and the symmetry of the system, the motion of star 2 relative to star 1 will mirror the motion of star 1 relative to star 2.
+The last two terms constitute the effective potential in Eq. \ref{eq:effective_potential}. Note, because of Newton's third law and the symmetry of the system, the motion of star 1 relative to the barycenter will be ``equal and opposite'' the motion of star 2: at any given time, it will be at radius $a/2$ and angle $\varphi + \pi$ from the barycenter.
 
 \begin{figure}[!b]
 \centering
@@ -150,7 +150,7 @@ E_L = -\frac{GM^2}{2a_L} = - \left( \frac{GM^{5/2}}{2L} \right)^2
 
 \hspace{15pt} The last term in the effective potential looks like $L^2/Ma^2$, which can loosely be thought of as summoning a central force
 \begin{equation}
-\mathbf{F}_{\rm c}(a; L) = -\frac{\partial\Phi}{\partial a} \, \hat{\mathbf{a}} = \frac{2L^2}{Ma^3} \, \hat{\mathbf{a}}
+\mathbf{F}_{\rm c}(a; L) = -\frac{\partial}{\partial a}\left(\frac{L^2}{Ma^2}\right) \, \hat{\mathbf{a}} = \frac{2L^2}{Ma^3} \, \hat{\mathbf{a}}
 \end{equation}
 pushing outward against each neutron star. (Here $\hat{\mathbf{a}} = \mathbf{a}/a$.) This is a \textit{centrifugal force} caused by angular motion that balances the radial pull of gravity and creates an effective 1-dimensional potential barrier at $a < a_L$, so that \emph{all} orbits (both open and closed) have an inner turning point. \textbf{Remember this, because we will revisit it when we add in the effects of general relativity.} The magnitude of orbital centrifugal force as a function of $f_{\rm GW}$ is visualized in Figure \ref{fig:forces}.
 
@@ -180,7 +180,9 @@ A unique orbit for one of the neutron stars is completely specified by starting 
 \end{enumerate}
 We can get around both of these issues by wisely applying the physical intuition we've been developing in the past couple of weeks.
 
-\hspace{15pt}I have an example simulation \href{https://github.com/alurban/mentoring/blob/master/tidal_distortion/scripts/kepler_orbits.py}{in GitHub}, which I wrote in Python. I used a fixed angular momentum of $L=$ 4$\times$10$^{42}$ J$\cdot$s, a range of total energies between 0 and $E_L$ (Eq. \ref{eq:energy}), and initial values $a(t_0) = a_L$ (Eq. \ref{eq:aL}) and $\varphi(t_0) = 0$. For each orbit, I used a step size equal to 0.005\% of $P_{\rm circular}$ (the period we expect for stable circular orbits), and chose the initial velocity to be negative (\textit{i.e.} falling toward the other neutron star). I then followed each orbit for 15$P_{\rm circular}$. The results are shown in Figures \ref{fig:simulated_parameters}, \ref{fig:sanity_checks}, \ref{fig:trace}, and \ref{fig:trace_unbound}. We will pour through each of these results together in great detail, but in the meantime, you should look at them closely on your own.
+\hspace{15pt}I have an example simulation \href{https://github.com/alurban/mentoring/blob/master/tidal_distortion/scripts/kepler_orbits.py}{in GitHub}, which I wrote in Python. I used a fixed angular momentum of $L=$ 4$\times$10$^{42}$ J$\cdot$s, a range of total energies between 0 and $E_L$ (Eq. \ref{eq:energy}), and initial values $a(t_0) = a_L$ (Eq. \ref{eq:aL}) and $\varphi(t_0) = 0$. For each orbit, I used a step size equal to 0.005\% of $P_{\rm circular}$ (the period we expect for stable circular orbits), and chose the initial velocity to be negative (\textit{i.e.} falling toward the other neutron star). I then followed each orbit for a total time of 5$P_{\rm circular}$. The results are shown in Figures \ref{fig:simulated_parameters}, \ref{fig:sanity_checks}, \ref{fig:trace}, and \ref{fig:trace_unbound}. To trace the orbits in polar coordinates, I drew star 2 at radius $a/2$ and angle $\varphi$, and star 1 at radius $a/2$ and angle $\varphi + \pi$.
+
+\hspace{15pt}We will pour through each of these results together in great detail, but in the meantime, you should look at them closely on your own.
 
 \end{enumerate}
 
@@ -224,13 +226,13 @@ We can get around both of these issues by wisely applying the physical intuition
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=1]{stable_orbit/orbit_diagram.pdf}
-\caption{\label{fig:trace} Traces of the four closed orbits I simulated on a polar diagram. The circular orbit is at a radius $a_L \approx 20$ km. (Note that when you use too high a step size during elliptical orbits, the perihelion advances clockwise around the orbital plane -- this is unphysical behavior that is actually impossible in Keplerian orbits.)}
+\caption{\label{fig:trace} Traces of the four closed orbits I simulated, visualized in polar coordinates in the center of mass frame. Solid lines show the orbital motion of star 2, while dashed lines show the motion of star 1. The circular orbit (solid black) is at a radius $r \approx 10$ km. (Note that when you use too high a step size during elliptical orbits, the perihelion advances clockwise around the orbital plane -- this is unphysical behavior that is actually impossible in Keplerian orbits.)}
 \end{figure}
 
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=1]{stable_orbit/orbit_diagram_unbound.pdf}
-\caption{\label{fig:trace_unbound} Trace of the marginally bound parabolic orbit with $E=0$. Note the way this orbit starts at $a_L$ and rapidly gets shot way out of range; in this case the neutron star would continue escaping to infinity. Traces of the other elliptical orbits are shown for reference. (The parabolic orbit was followed out to around $a\approx 800$ km.)}
+\caption{\label{fig:trace_unbound} Trace of the marginally bound parabolic orbit of star 1 (dashed) and star 2 (solid) that has $E=0$. Note the way this orbit starts at a separation of $a_L$ and rapidly gets shot way out of range; in this case the neutron stars would each continue escaping to infinity. Traces of the other elliptical orbits are shown for reference. (The parabolic orbit was followed out to around $r\approx 200$ km.)}
 \end{figure}
 
 \end{document}
