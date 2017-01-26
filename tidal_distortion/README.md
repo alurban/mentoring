@@ -7,7 +7,7 @@ Contents
 --------
 
 * `tidal_notes.{tex,pdf}`: The first problem set on Newtonian tidal forces, and some notes on how I solved it.
-* `stable_orbit.{tex,pdf}`: The second problem set on stable Keplerian orbits, and some notes on how I solved it.
+* `keplerian_orbit.{tex,pdf}`: The second problem set on stable Keplerian orbits, and some notes on how I solved it.
 * `scripts/`: A directory containing Python scripts related to these notes, e.g. a script that computes orbital separation and tidal forces as a function of gravitational wave frequency.
 * `scripts/matplotlibrc`: A local configuration of matplotlib settings, because I am very picky about how my plots look.
 * `Makefile`: Running `make` will produce a PDF rendering of the notes documents referred to above.
@@ -15,7 +15,7 @@ Contents
 Note: all the details of this problem are captured in `*.pdf` documents in this directory. In sequntial order, they go:
 
 1. `tidal_notes.pdf`
-2. `stable_orbit.pdf`
+2. `keplerian_orbit.pdf`
 
 Software Requirements
 ---------------------
@@ -53,7 +53,7 @@ and the same for notes on stable orbits. Alternatively, you can use the Makefile
 
 ```
 make tidal_notes
-make stable_orbits
+make keplerian_orbits
 ```
 
 To re-generate drafts of all notes:
