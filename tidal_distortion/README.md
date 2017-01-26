@@ -25,6 +25,7 @@ Software Requirements
 * [Python 2.x](https://www.python.org)
 * [NumPy](http://www.numpy.org)
 * [Matplotlib](http://matplotlib.org)
+* [jr-tools](https://github.com/kingjr/jr-tools), a suite of open source tools I used to turn time-sampled simulation data into gifs illustrating orbits
 
 Instructions
 ------------
