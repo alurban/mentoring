@@ -8,6 +8,7 @@ Contents
 
 * `intro.{tex,pdf}`: The first problem set on Newtonian tidal forces, and some notes on how I solved it.
 * `keplerian_orbit.{tex,pdf}`: The second problem set on stable Keplerian orbits, and some notes on how I solved it.
+* `relativistic_orbit.{tex,pdf}`: The third problem set that introduces a more efficient numerical integration scheme called RK4 (RK for Runge-Kutta, 4 for 4th-order), and starts exploring the astrophysics of relativistic orbits and relativistic collisions.
 * `scripts/`: A directory containing Python scripts related to these notes, e.g. a script that computes orbital separation and tidal forces as a function of gravitational wave frequency.
 * `scripts/matplotlibrc`: A local configuration of matplotlib settings, because I am very picky about how my plots look.
 * `Makefile`: Running `make` will produce a PDF rendering of the notes documents referred to above.
@@ -16,6 +17,7 @@ Note: all the details of this problem are captured in `*.pdf` documents in this 
 
 1. `intro.pdf`
 2. `keplerian_orbit.pdf`
+3. `relativistic_orbit.pdf`
 
 Software Requirements
 ---------------------
@@ -55,6 +57,7 @@ and the same for notes on stable orbits. Alternatively, you can use the Makefile
 ```
 make intro
 make keplerian_orbits
+make relativistic_orbits
 ```
 
 To re-generate drafts of all notes:
