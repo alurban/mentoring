@@ -208,23 +208,23 @@ plt.savefig('relativistic_orbit_diagram.pdf')
 
 
 # Finally, write a gif for each closed orbit.
-#try:
-fig = plt.figure( figsize=(6, 6) )
-ax = fig.add_subplot(1, 1, 1, projection='polar')
-images = []
-for i in (2,):
-    for j in xrange(len(t[::100])):
-        ax.scatter(phi[i][100*j], r[i][100*j]/1000, c='Tomato', s=300, edgecolors='none')
-        ax.scatter(0, 0, c='Tomato', s=300, edgecolors='none')
-        ax.set_rmax(50)
-        ax.set_rticks([10, 20, 30, 40, 50])
-        ax.grid(True)
-        ax.set_xticklabels(['0$^{\circ}$', '45$^{\circ}$', '90$^{\circ}$', '135$^{\circ}$', '180$^{\circ}$',
-            '225$^{\circ}$', '270$^{\circ}$', '315$^{\circ}$'])
-        ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
-        ax.set_title('$E =$ %s$E_L$' % frac[i])
-        images.append( fig2img(fig) )
-        ax.clear()
-writeGif('orbits.gif', images, duration=100*dt, dither=1)
-#except:
-#    import sys; sys.exit(0)
+try:
+    fig = plt.figure( figsize=(6, 6) )
+    ax = fig.add_subplot(1, 1, 1, projection='polar')
+    images = []
+    for i in (2,):
+        for j in xrange(len(t[::100])):
+            ax.scatter(phi[i][100*j], r[i][100*j]/1000, c='Tomato', s=300, edgecolors='none')
+            ax.scatter(0, 0, c='Tomato', s=300, edgecolors='none')
+            ax.set_rmax(50)
+            ax.set_rticks([10, 20, 30, 40, 50])
+            ax.grid(True)
+            ax.set_xticklabels(['0$^{\circ}$', '45$^{\circ}$', '90$^{\circ}$', '135$^{\circ}$', '180$^{\circ}$',
+                '225$^{\circ}$', '270$^{\circ}$', '315$^{\circ}$'])
+            ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
+            ax.set_title('$E =$ %s$E_L$' % frac[i])
+            images.append( fig2img(fig) )
+            ax.clear()
+    writeGif('orbits.gif', images, duration=100*dt, dither=1)
+except:
+    import sys; sys.exit(0)
