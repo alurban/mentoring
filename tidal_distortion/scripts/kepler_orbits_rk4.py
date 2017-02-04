@@ -159,7 +159,7 @@ ax2.set_ylabel('total energy (10$^{45}$ J)')
 ax2.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
 plt.setp(ax2.get_xticklabels(), visible=False)
 
-# Plot the simulated angular momenta as a function of time.
+# Plot the relative error in energy as a function of time.
 ax3 = fig.add_subplot(3, 1, 3)
 for i in xrange(len(frac) - 1):
     energy = np.array([(M/4)*y**2 + Phi(x, L) for x, y in zip(r[i], vr[i])])
