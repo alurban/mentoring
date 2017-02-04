@@ -17,9 +17,9 @@ except:
 # Physical constants.
 G = 6.67408e-11  # Newton's constant in m^3 / kg / s
 MSun = 1.989e30  # Solar mass in kg
-M = 1.4 * MSun   # Mass of each neutron star in this example
 c = 299792458.   # Speed of light in m/s
-mu, Mtot = M/2, 2*M  # reduced mass, total mass in kg
+m1, m2 = 1.4*MSun, 1.4*MSun  # component masses in kg
+mu, M = m1*m2/(m1+m2), m1 + m2  # reduced mass, total mass in kg
 
 
 # Function definitions.
@@ -27,14 +27,14 @@ def Phi(r, h):
     """ Returns the effective potential energy given the following parameters:
             r: the orbital separation in meters
             h: the prescribed orbital angular momentum per unit mass in J*s/kg """
-    return -G*M**2 / r + (M/2) * (h/r)**2 - G * M**2 * h**2 / (c**2 * r**3)
+    return -G*mu*M/r + (mu/2)*(h/r)**2 - G*M*mu*h**2/(c**2*r**3)
 
 def v0(r, E, h):
     """ Returns the initial radial velocity constrained by the following parameters:
             r: the initial separation in meters
             E: the prescribed total energy of the orbit in Joules
             h: the prescribed orbital angular momentum per unit mass in J*s/kg """
-    return -np.sqrt( (2 / M) * abs(E - Phi(r, h)) )
+    return -np.sqrt( (2 / mu) * abs(E - Phi(r, h)) )
 
 def g(f, h):
     """ Returns the right-hand side of three equations of motion at a single point,
@@ -62,7 +62,7 @@ def rk4(f, dt, h):
 
 
 # Set initial conditions.
-h = 3.9*G*M/c  # angular momentum, in J*s/kg
+h = 3.75*G*M/c  # angular momentum, in J*s/kg
 rC = (h**2 + h*np.sqrt(h**2 - 12*(G*M/c)**2)) / (2*G*M)  # initial separation, in meters
 Porb = 2 * pi * np.sqrt(rC**3/(G*M))  # period of a stable circular orbit
 dt = Porb / 1000.  # step size, determined as 1% of Porb
@@ -145,7 +145,7 @@ fig = plt.figure( figsize=(6, 7.5) )
 ax1 = fig.add_subplot(3, 1, 1)
 ax1.plot([0, 100], [0, 0], 'k--', linewidth=0.5)
 for i in xrange(1, len(frac)):
-    energy = np.array([(M/2)*y**2 + Phi(x, h) for x, y in zip(r[i], vr[i])])
+    energy = np.array([(mu/2)*y**2 + Phi(x, h) for x, y in zip(r[i], vr[i])])
     ax1.plot(np.array(r[i])/1000, energy/1e45, color[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
 a_plot = np.arange(1e-4, 100000, 100)
 potential = Phi(a_plot, h)
@@ -153,7 +153,7 @@ ax1.plot(a_plot/1000, potential/1e45, 'k-.', linewidth=1.5)
 ax1.set_xlim([0, 100])
 ax1.set_xlabel('orbital separation (km)')
 ax1.xaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
-ax1.set_ylim([-15, 10])
+ax1.set_ylim([-6, 2])
 ax1.set_ylabel('energy (10$^{45}$ J)')
 ax1.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
 leg = ax1.legend(loc=1, fontsize=10, fancybox=True)
@@ -161,7 +161,7 @@ leg = ax1.legend(loc=1, fontsize=10, fancybox=True)
 # Plot the simulated energies as a function of time.
 ax2 = fig.add_subplot(3, 1, 2)
 for i in xrange(len(frac)):
-    energy = np.array([(M/2)*y**2 + Phi(x, h) for x, y in zip(r[i], vr[i])])
+    energy = np.array([(mu/2)*y**2 + Phi(x, h) for x, y in zip(r[i], vr[i])])
     ax2.plot(t[:len(r[i])]/Porb, energy/1e45, color[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
 ax2.set_xlim([0, 5])
 ax2.set_ylim([-15, 5])
@@ -169,10 +169,10 @@ ax2.set_ylabel('total energy (10$^{45}$ J)')
 ax2.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
 plt.setp(ax2.get_xticklabels(), visible=False)
 
-# Plot the simulated angular momenta as a function of time.
+# Plot the relative error in energy as a function of time.
 ax3 = fig.add_subplot(3, 1, 3)
 for i in xrange(len(frac)):
-    energy = np.array([(M/2)*y**2 + Phi(x, h) for x, y in zip(r[i], vr[i])])
+    energy = np.array([(mu/2)*y**2 + Phi(x, h) for x, y in zip(r[i], vr[i])])
     error = np.array([abs((E - frac[i]*EL) / (frac[i] * EL)) for E in energy])
     ax3.plot(t[:len(r[i])]/Porb, error*100., color[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
 ax3.set_xlim([0, 5])
@@ -195,7 +195,7 @@ ax = fig.add_subplot(1, 1, 1, projection='polar')
 for i in xrange(1, len(frac)):
     ax.plot(phi[i], np.array(r[i])/1000, color[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
 ax.set_rmax(100)
-ax.set_rticks([40, 60, 80, 100])
+ax.set_rticks([60, 80, 100])
 ax.grid(True)
 ax.set_xticklabels(['0$^{\circ}$', '45$^{\circ}$', '90$^{\circ}$', '135$^{\circ}$', '180$^{\circ}$',
     '225$^{\circ}$', '270$^{\circ}$', '315$^{\circ}$'])
@@ -214,8 +214,8 @@ try:
     images = []
     for i in (2,):
         for j in xrange(len(t[::100])):
-            ax.scatter(phi[i][100*j], r[i][100*j]/1000, c='Tomato', s=300, edgecolors='none')
-            ax.scatter(0, 0, c='Tomato', s=300, edgecolors='none')
+            ax.scatter(phi[i][100*j], r[i][100*j]/2000, c='Tomato', s=300, edgecolors='none')
+            ax.scatter(phi[i][100*j] + pi, r[i][100*j]/2000, c='Tomato', s=300, edgecolors='none')
             ax.set_rmax(50)
             ax.set_rticks([10, 20, 30, 40, 50])
             ax.grid(True)
