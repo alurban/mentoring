@@ -42,7 +42,7 @@ Pasadena, CA 91125, USA \\
 \begin{mdframed}
 \centering
 \includegraphics{relativistic_orbit/binary_diagram.pdf}
-\caption{\label{fig:binary_diagram}Diagram of the neutron star binary in the rest frame of star 1, showing its orbital separation vector ($\mathbf{r}$) and the radius ($R$) and masses ($m_1$, $m_2$) of the individual neutron stars. The azimuthal angle $\varphi$ is also indicated.}
+\caption{\label{fig:binary_diagram}Diagram of the neutron star binary in the center of mass frame, showing its orbital separation vector ($\mathbf{r}$) and the radius ($R$) and masses ($m_1$, $m_2$) of the individual neutron stars. The azimuthal angle $\varphi$ is also indicated.}
 \end{mdframed}
 \end{figure}
 
@@ -53,18 +53,18 @@ Pasadena, CA 91125, USA \\
 \item First, we want to experiment with a better numerical integrator using a problem we already understand. Try re-doing the Keplerian orbit simulation, only this time, use the RK4 integration scheme: if $t_i, \dots, t_N$ are a series of time samples and $df/dt = g(f, t)$ a differential equation for some set of functions $f$, then the RK4 method
 \begin{align*}
 k_1 &= g(f(t_i), \, t_i) \\
-k_2 &= g\left(f(t_i) + \frac{hk_1}{2}, \, t_i + \frac{h}{2}\right) \\
-k_3 &= g\left(f(t_i) + \frac{hk_2}{2}, \, t_i + \frac{h}{2}\right) \\
-k_4 &= g(f(t_i) + hk_3, \, t_i + h) \\
-f(t_{i+1}) &= f(t_i) + \frac{h}{6}\,\left(k_1 + 2k_2 + 2k_3 + k_4\right)
+k_2 &= g\left(f(t_i) + \frac{k_1}{2}\Delta t, \, t_i + \frac{1}{2}\Delta t\right) \\
+k_3 &= g\left(f(t_i) + \frac{k_2}{2}\Delta t, \, t_i + \frac{1}{2}\Delta t\right) \\
+k_4 &= g(f(t_i) + k_3\,\Delta t, \, t_i + \Delta t) \\
+f(t_{i+1}) &= f(t_i) + \frac{\Delta t}{6}\,\left(k_1 + 2k_2 + 2k_3 + k_4\right)
 \end{align*}
-is a generalization of Simpson's rule with step size $h$.
+is a generalization of Simpson's rule with step size $\Delta t$.
 
 \hspace{15pt} Show that, for the Keplerian orbit problem, the RK4 method still conserves energy and angular momentum, and that it allows you to use a much larger step size without introducing numerical error. (How much larger can the step size be?)
 
 \item To visualize some important effects from general relativity, consider a correction to the total energy that comes from the simplest example of curved spacetime:
 \begin{equation}
-\frac{E^2 - \mu c^2}{2\mu c^2} = \frac{1}{2}\mu\left(\frac{dr}{d\tau}\right)^2 + \Phi(r, L)
+\frac{1}{2} \left(\frac{E^2}{\mu c^2} - \mu c^2\right) = \frac{1}{2}\mu\left(\frac{dr}{d\tau}\right)^2 + \Phi(r, L)
 \end{equation}
 where $\tau$ is the proper time, $\mu = m_1 m_2/(m_1 + m_2)$ is the reduced mass, $M = m_1 + m_2$ is the total mass, and the effective potential
 \begin{equation}\label{eq:potential}
