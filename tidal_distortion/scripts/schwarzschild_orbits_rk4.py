@@ -209,8 +209,7 @@ plt.savefig('relativistic_orbit_diagram.pdf')
 
 
 # Finally, write a gif for each closed orbit.
-#try:
-if r:
+try:
     fig = plt.figure( figsize=(6, 6) )
     ax = fig.add_subplot(1, 1, 1)
     star1 = ax.scatter(r[-2][0]/2000, 0, c='Tomato', s=1000, edgecolors='none')
@@ -256,5 +255,5 @@ if r:
         return star1, star2, ax
     anim = FuncAnimation(fig, update_2, frames=len(r[1])/50, interval=40)
     anim.save('elliptical_orbit.gif', dpi=80, writer='imagemagick')
-#except:
-#    import sys; sys.exit(0)
+except:
+    import sys; sys.exit(0)
