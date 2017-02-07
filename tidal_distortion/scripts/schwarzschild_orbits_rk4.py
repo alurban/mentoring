@@ -62,7 +62,7 @@ def rk4(f, dt, h):
 
 
 # Set initial conditions.
-h = 3.75*G*M/c  # angular momentum, in J*s/kg
+h = 3.82*G*M/c  # angular momentum, in J*s/kg
 rC = (h**2 + h*np.sqrt(h**2 - 12*(G*M/c)**2)) / (2*G*M)  # initial separation, in meters
 Porb = 2 * pi * np.sqrt(rC**3/(G*M))  # period of a stable circular orbit
 dt = Porb / 1000.  # step size, determined as 1% of Porb
@@ -208,23 +208,23 @@ plt.savefig('relativistic_orbit_diagram.pdf')
 
 
 # Finally, write a gif for each closed orbit.
-try:
-    fig = plt.figure( figsize=(6, 6) )
-    ax = fig.add_subplot(1, 1, 1, projection='polar')
-    images = []
-    for i in (2,):
-        for j in xrange(len(t[::100])):
-            ax.scatter(phi[i][100*j], r[i][100*j]/2000, c='Tomato', s=300, edgecolors='none')
-            ax.scatter(phi[i][100*j] + pi, r[i][100*j]/2000, c='Tomato', s=300, edgecolors='none')
-            ax.set_rmax(50)
-            ax.set_rticks([10, 20, 30, 40, 50])
-            ax.grid(True)
-            ax.set_xticklabels(['0$^{\circ}$', '45$^{\circ}$', '90$^{\circ}$', '135$^{\circ}$', '180$^{\circ}$',
-                '225$^{\circ}$', '270$^{\circ}$', '315$^{\circ}$'])
-            ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
-            ax.set_title('$E =$ %s$E_L$' % frac[i])
-            images.append( fig2img(fig) )
-            ax.clear()
-    writeGif('orbits.gif', images, duration=100*dt, dither=1)
-except:
-    import sys; sys.exit(0)
+#try:
+#    fig = plt.figure( figsize=(6, 6) )
+#    ax = fig.add_subplot(1, 1, 1, projection='polar')
+#    images = []
+#    for i in (2,):
+#        for j in xrange(len(t[::100])):
+#            ax.scatter(phi[i][100*j], r[i][100*j]/2000, c='Tomato', s=300, edgecolors='none')
+#            ax.scatter(phi[i][100*j] + pi, r[i][100*j]/2000, c='Tomato', s=300, edgecolors='none')
+#            ax.set_rmax(50)
+#            ax.set_rticks([10, 20, 30, 40, 50])
+#            ax.grid(True)
+#            ax.set_xticklabels(['0$^{\circ}$', '45$^{\circ}$', '90$^{\circ}$', '135$^{\circ}$', '180$^{\circ}$',
+#                '225$^{\circ}$', '270$^{\circ}$', '315$^{\circ}$'])
+#            ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
+#            ax.set_title('$E =$ %s$E_L$' % frac[i])
+#            images.append( fig2img(fig) )
+#            ax.clear()
+#    writeGif('orbits.gif', images, duration=100*dt, dither=1)
+#except:
+#    import sys; sys.exit(0)
