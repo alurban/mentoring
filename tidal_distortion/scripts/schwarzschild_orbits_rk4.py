@@ -5,11 +5,10 @@ import matplotlib.pyplot as plt
 import matplotlib.patheffects as PE
 from matplotlib import ticker
 
-# The jr-tools package can be downloaded and
-# installed from: https://github.com/kingjr/jr-tools
+# The ImageMagick package is needed for gifs.
+# Visit http://www.imagemagick.org.
 try:
-    from jr.gif.Figtodat import fig2img
-    from jr.gif.images2gif import writeGif
+    from matplotlib.animation import FuncAnimation
 except:
     print "Couldn't find gif-making packages; continuing without gifs."
 
@@ -147,7 +146,7 @@ ax1 = fig.add_subplot(3, 1, 1)
 for i in xrange(1, len(frac)):
     energy = np.array([(mu/2)*y**2 + Phi(x, h) for x, y in zip(r[i], vr[i])])
     ax1.plot(np.array(r[i])/1000, energy/1e45, color[i], linewidth=2.)
-a_plot = np.arange(1e-4, 100*G*M/c**2, 100)
+a_plot = np.arange(1e-4, 50*G*M/c**2, 100)
 potential = Phi(a_plot, h)
 ax1.plot(a_plot/1000, potential/1e45, 'k-.', linewidth=1.5)
 ax1.set_xlim([0, 200])
@@ -210,23 +209,52 @@ plt.savefig('relativistic_orbit_diagram.pdf')
 
 
 # Finally, write a gif for each closed orbit.
-try:
+#try:
+if r:
     fig = plt.figure( figsize=(6, 6) )
-    ax = fig.add_subplot(1, 1, 1, projection='polar')
-    images = []
-    for i in (2,):
-        for j in xrange(len(t[::100])):
-            ax.scatter(phi[i][100*j], r[i][100*j]/2000, c='Tomato', s=300, edgecolors='none')
-            ax.scatter(phi[i][100*j] + pi, r[i][100*j]/2000, c='Tomato', s=300, edgecolors='none')
-            ax.set_rmax(50)
-            ax.set_rticks([10, 20, 30, 40, 50])
-            ax.grid(True)
-            ax.set_xticklabels(['0$^{\circ}$', '45$^{\circ}$', '90$^{\circ}$', '135$^{\circ}$', '180$^{\circ}$',
-                '225$^{\circ}$', '270$^{\circ}$', '315$^{\circ}$'])
-            ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
-            ax.set_title('$E =$ %s$E_L$' % frac[i])
-            images.append( fig2img(fig) )
-            ax.clear()
-    writeGif('orbits.gif', images, duration=100*dt, dither=1)
-except:
-    import sys; sys.exit(0)
+    ax = fig.add_subplot(1, 1, 1)
+    star1 = ax.scatter(r[-2][0]/2000, 0, c='Tomato', s=1000, edgecolors='none')
+    star2 = ax.scatter(-r[-2][0]/2000, 0, c='Tomato', s=1000, edgecolors='none')
+    ax.grid(False)
+    ax.set_xlim([-100, 100])
+    ax.set_xlabel('$x$ (km)')
+    ax.set_ylim([-100, 100])
+    ax.set_ylabel('$y$ (km)')
+    ax.xaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
+    ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
+    ax.set_title('marginal capture orbit')
+    def update_1(i):
+        """ Update the neutron star positions, then return a tuple of
+            artists that have to be redrawn for this frame. """
+        x1, y1 = r[-2][50*i] * np.cos(phi[-2][50*i]), r[-2][50*i] * np.sin(phi[-2][50*i])
+        x2, y2 = -x1, -y1
+        star1.set_offsets( (x1/2000, y1/2000) )
+        star2.set_offsets( (x2/2000, y2/2000) )
+        return star1, star2, ax
+    anim = FuncAnimation(fig, update_1, frames=len(r[-2])/50, interval=40)
+    anim.save('capture_orbit.gif', dpi=80, writer='imagemagick')
+
+    fig = plt.figure( figsize=(6, 6) )
+    ax = fig.add_subplot(1, 1, 1)
+    star1 = ax.scatter(r[1][0]/2000, 0, c='Tomato', s=1000, edgecolors='none')
+    star2 = ax.scatter(-r[1][0]/2000, 0, c='Tomato', s=1000, edgecolors='none')
+    ax.grid(False)
+    ax.set_xlim([-100, 100])
+    ax.set_xlabel('$x$ (km)')
+    ax.set_ylim([-100, 100])
+    ax.set_ylabel('$y$ (km)')
+    ax.xaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
+    ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
+    ax.set_title('elliptical orbit')
+    def update_2(i):
+        """ Update the neutron star positions, then return a tuple of
+            artists that have to be redrawn for this frame. """
+        x1, y1 = r[1][50*i] * np.cos(phi[1][50*i]), r[1][50*i] * np.sin(phi[1][50*i])
+        x2, y2 = -x1, -y1
+        star1.set_offsets( (x1/2000, y1/2000) )
+        star2.set_offsets( (x2/2000, y2/2000) )
+        return star1, star2, ax
+    anim = FuncAnimation(fig, update_2, frames=len(r[1])/50, interval=40)
+    anim.save('elliptical_orbit.gif', dpi=80, writer='imagemagick')
+#except:
+#    import sys; sys.exit(0)
