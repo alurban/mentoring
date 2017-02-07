@@ -66,7 +66,7 @@ h = 3.82*G*M/c  # angular momentum, in J*s/kg
 rC = (h**2 + h*np.sqrt(h**2 - 12*(G*M/c)**2)) / (2*G*M)  # initial separation, in meters
 Porb = 2 * pi * np.sqrt(rC**3/(G*M))  # period of a stable circular orbit
 dt = Porb / 1000.  # step size, determined as 1% of Porb
-t = np.arange(0, 10*1.01*Porb, dt)  # time samples
+t = np.arange(0, 5*1.01*Porb, dt)  # time samples
 EL = Phi(rC, h)  # total energy of a stable circular orbit
 frac = np.array([1, 0.99, 0.8, 0.5, 0.2]) # fractions of EL to simulate
 v0 = np.array([v0(rC, E, h) for E in frac * EL])  # initial radial velocities
@@ -75,6 +75,7 @@ v0 = np.array([v0(rC, E, h) for E in frac * EL])  # initial radial velocities
 # Perform the numerical simulation.
 r = [[rC] for x in frac]
 vr = [[x] for x in v0]
+vr[-2][0] = -vr[-2][0]  # draw the first capture orbit initially going outward
 phi = [[0] for x in frac]
 v = [[np.sqrt( y**2 + (h / rC)**2 )] for x, y in zip(frac, v0)]
 
@@ -94,7 +95,7 @@ for i in xrange(len(frac)):
 
 # Construct a figure showing orbital parameters.
 fig = plt.figure( figsize=(6, 7.5) )
-color = ['k--', 'CornflowerBlue', 'Red', 'Silver', 'k']
+color = ['k--', 'DodgerBlue', 'Red', 'LimeGreen', 'k']
 
 # Plot the orbital separation as a function of time.
 ax1 = fig.add_subplot(3, 1, 1)
@@ -103,10 +104,10 @@ for i in xrange(len(frac)):
 ax1.fill_between(t/Porb, 0, 11, facecolor='Tomato', edgecolor='Tomato', alpha=0.5)
 ax1.fill_between(t/Porb, 0, 12, facecolor='Tomato', edgecolor='Tomato', alpha=0.5)
 ax1.fill_between(t/Porb, 0, 13, facecolor='Tomato', edgecolor='Tomato', alpha=0.5)
-ax1.annotate('neutron star radius', xy=(2.5, 6), xycoords='data', size=12, ha="center", va="center",
+ax1.annotate('neutron star radius', xy=(2.5, 6), xycoords='data', size=10, ha="center", va="center",
     path_effects=[PE.withStroke(linewidth=3, foreground="w")])
 ax1.set_xlim([0, 5])
-ax1.set_ylim([0, 100])
+ax1.set_ylim([0, 170])
 ax1.set_ylabel('orbital separation (km)')
 ax1.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
 plt.setp(ax1.get_xticklabels(), visible=False)
@@ -143,20 +144,18 @@ fig = plt.figure( figsize=(6, 7.5) )
 
 # Plot the simulated energies on a diagram as a function of radius.
 ax1 = fig.add_subplot(3, 1, 1)
-ax1.plot([0, 100], [0, 0], 'k--', linewidth=0.5)
 for i in xrange(1, len(frac)):
     energy = np.array([(mu/2)*y**2 + Phi(x, h) for x, y in zip(r[i], vr[i])])
-    ax1.plot(np.array(r[i])/1000, energy/1e45, color[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
-a_plot = np.arange(1e-4, 100000, 100)
+    ax1.plot(np.array(r[i])/1000, energy/1e45, color[i], linewidth=2.)
+a_plot = np.arange(1e-4, 100*G*M/c**2, 100)
 potential = Phi(a_plot, h)
 ax1.plot(a_plot/1000, potential/1e45, 'k-.', linewidth=1.5)
-ax1.set_xlim([0, 100])
+ax1.set_xlim([0, 200])
 ax1.set_xlabel('orbital separation (km)')
 ax1.xaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
-ax1.set_ylim([-6, 2])
+ax1.set_ylim([-6, 0])
 ax1.set_ylabel('energy (10$^{45}$ J)')
 ax1.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
-leg = ax1.legend(loc=1, fontsize=10, fancybox=True)
 
 # Plot the simulated energies as a function of time.
 ax2 = fig.add_subplot(3, 1, 2)
@@ -164,17 +163,18 @@ for i in xrange(len(frac)):
     energy = np.array([(mu/2)*y**2 + Phi(x, h) for x, y in zip(r[i], vr[i])])
     ax2.plot(t[:len(r[i])]/Porb, energy/1e45, color[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
 ax2.set_xlim([0, 5])
-ax2.set_ylim([-15, 5])
+ax2.set_ylim([-6, 0])
 ax2.set_ylabel('total energy (10$^{45}$ J)')
 ax2.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
 plt.setp(ax2.get_xticklabels(), visible=False)
+leg = ax2.legend(loc=1, fontsize=10, fancybox=True)
 
 # Plot the relative error in energy as a function of time.
 ax3 = fig.add_subplot(3, 1, 3)
 for i in xrange(len(frac)):
     energy = np.array([(mu/2)*y**2 + Phi(x, h) for x, y in zip(r[i], vr[i])])
     error = np.array([abs((E - frac[i]*EL) / (frac[i] * EL)) for E in energy])
-    ax3.plot(t[:len(r[i])]/Porb, error*100., color[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
+    ax3.plot(t[:len(r[i])]/Porb, error*100., color[i], linewidth=2.)
 ax3.set_xlim([0, 5])
 ax3.set_xlabel(r'$t/P_{\rm circular}$ (unitless)')
 ax3.xaxis.set_major_formatter(ticker.FormatStrFormatter("%.2g"))
@@ -192,10 +192,12 @@ fig = plt.figure( figsize=(6, 6) )
 
 # Plot a radial diagram of the simulated orbits.
 ax = fig.add_subplot(1, 1, 1, projection='polar')
-for i in xrange(1, len(frac)):
-    ax.plot(phi[i], np.array(r[i])/1000, color[i], linewidth=2., label='$E =$ %s$E_L$' % frac[i])
-ax.set_rmax(100)
-ax.set_rticks([60, 80, 100])
+for i in xrange(1, 3):
+    ax.plot(phi[i], np.array(r[i])/1000, color[i], linewidth=1.25, label='$E =$ %s$E_L$' % frac[i])
+for i in xrange(3, len(frac)):
+    ax.plot(phi[i], np.array(r[i])/1000, color[i], linewidth=2.5, label='$E =$ %s$E_L$' % frac[i])
+ax.set_rmax(170)
+ax.set_rticks([90, 140])
 ax.grid(True)
 ax.set_xticklabels(['0$^{\circ}$', '45$^{\circ}$', '90$^{\circ}$', '135$^{\circ}$', '180$^{\circ}$',
     '225$^{\circ}$', '270$^{\circ}$', '315$^{\circ}$'])
@@ -208,23 +210,23 @@ plt.savefig('relativistic_orbit_diagram.pdf')
 
 
 # Finally, write a gif for each closed orbit.
-#try:
-#    fig = plt.figure( figsize=(6, 6) )
-#    ax = fig.add_subplot(1, 1, 1, projection='polar')
-#    images = []
-#    for i in (2,):
-#        for j in xrange(len(t[::100])):
-#            ax.scatter(phi[i][100*j], r[i][100*j]/2000, c='Tomato', s=300, edgecolors='none')
-#            ax.scatter(phi[i][100*j] + pi, r[i][100*j]/2000, c='Tomato', s=300, edgecolors='none')
-#            ax.set_rmax(50)
-#            ax.set_rticks([10, 20, 30, 40, 50])
-#            ax.grid(True)
-#            ax.set_xticklabels(['0$^{\circ}$', '45$^{\circ}$', '90$^{\circ}$', '135$^{\circ}$', '180$^{\circ}$',
-#                '225$^{\circ}$', '270$^{\circ}$', '315$^{\circ}$'])
-#            ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
-#            ax.set_title('$E =$ %s$E_L$' % frac[i])
-#            images.append( fig2img(fig) )
-#            ax.clear()
-#    writeGif('orbits.gif', images, duration=100*dt, dither=1)
-#except:
-#    import sys; sys.exit(0)
+try:
+    fig = plt.figure( figsize=(6, 6) )
+    ax = fig.add_subplot(1, 1, 1, projection='polar')
+    images = []
+    for i in (2,):
+        for j in xrange(len(t[::100])):
+            ax.scatter(phi[i][100*j], r[i][100*j]/2000, c='Tomato', s=300, edgecolors='none')
+            ax.scatter(phi[i][100*j] + pi, r[i][100*j]/2000, c='Tomato', s=300, edgecolors='none')
+            ax.set_rmax(50)
+            ax.set_rticks([10, 20, 30, 40, 50])
+            ax.grid(True)
+            ax.set_xticklabels(['0$^{\circ}$', '45$^{\circ}$', '90$^{\circ}$', '135$^{\circ}$', '180$^{\circ}$',
+                '225$^{\circ}$', '270$^{\circ}$', '315$^{\circ}$'])
+            ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
+            ax.set_title('$E =$ %s$E_L$' % frac[i])
+            images.append( fig2img(fig) )
+            ax.clear()
+    writeGif('orbits.gif', images, duration=100*dt, dither=1)
+except:
+    import sys; sys.exit(0)
