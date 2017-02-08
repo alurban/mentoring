@@ -19,17 +19,24 @@ Alternatively, you can open this repository in your desktop or download a ZIP-co
 Contents
 --------
 
-* [tidal_distortion](https://github.com/alurban/mentoring/tree/master/tidal_distortion) -- A project that builds a toy model of binary neutron star inspirals using Keplerian laws of motion
+* [tidal_distortion](https://github.com/alurban/mentoring/tree/master/tidal_distortion) -- A project that builds a toy model of binary neutron star inspirals using both Keplerian and relativistic laws of motion
 
 Other Resources
 ---------------
 
+At Caltech:
 * [Caltech Library](http://library.caltech.edu)
 * Caltech's [Office of Student Affairs](http://www.studaff.caltech.edu)
 * Caltech's [Center for Teaching, Learning, and Outreach](http://teachlearn.caltech.edu)
 * [A list of research facilities](https://www.caltech.edu/content/research-facilities)
 * Caltech [Student-Faculty Programs](http://sfp.caltech.edu)
+
+For data science and signal processing:
 * A neat [Python tutorial](https://www.learnpython.org) with focus on data science
+* [Stackoverflow](http://stackoverflow.com), a vast font of wisdom for coding and debugging
+* A collection of [tutorials](https://losc.ligo.org/tutorials/) centered on gravitational wave signal processing
+
+For LIGO and my associated research:
 * [LIGO Laboratory](http://ligo.caltech.edu)
 * Online version of my [curriculum vitae](http://alurban.github.io/)
 
