@@ -28,7 +28,7 @@ Software Requirements
 * [NumPy](http://www.numpy.org)
 * [Matplotlib](http://matplotlib.org)
 * [Image Magick](http://www.imagemagick.org/script/index.php), a suite of open source tools I used to turn time-sampled simulation data into gifs illustrating orbits
-* [FFmpeg](https://ffmpeg.org), a video format conversion architecture that can help produce much more memory-savvy video files.
+* [FFmpeg](https://ffmpeg.org), a video format conversion architecture that can help produce much more memory-savvy video files
 
 Instructions
 ------------
