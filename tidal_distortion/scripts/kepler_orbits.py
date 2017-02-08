@@ -5,13 +5,6 @@ import matplotlib.pyplot as plt
 import matplotlib.patheffects as PE
 from matplotlib import ticker
 
-# The jr-tools package can be downloaded and
-# installed from: https://github.com/kingjr/jr-tools
-try:
-    from jr.gif.Figtodat import fig2img
-    from jr.gif.images2gif import writeGif
-except:
-    print "Couldn't find gif-making packages; continuing without gifs."
 
 # Physical constants.
 G = 6.67408e-11  # Newton's constant in m^3 / kg / s
@@ -220,26 +213,3 @@ leg = ax.legend(loc=1, fontsize=10, fancybox=True)
 # Save the figure.
 fig.tight_layout()
 plt.savefig('orbit_diagram_unbound.pdf')
-
-
-# Finally, write a gif for each closed orbit.
-try:
-    for i in xrange(len(E)-1):
-        fig = plt.figure( figsize=(6, 6) )
-        ax = fig.add_subplot(1, 1, 1, projection='polar')
-        images = []
-        for j in xrange(len(t[:stop[i]:2000])):
-            ax.scatter(phi[i][2000*j], a[i][2000*j]/2000, c='Tomato', s=300, edgecolors='none')
-            ax.scatter(phi[i][2000*j] + pi, a[i][2000*j]/2000, c='Tomato', s=300, edgecolors='none')
-            ax.set_rmax(40)
-            ax.set_rticks([10, 20, 30, 40])
-            ax.grid(True)
-            ax.set_xticklabels(['0$^{\circ}$', '45$^{\circ}$', '90$^{\circ}$', '135$^{\circ}$', '180$^{\circ}$',
-                '225$^{\circ}$', '270$^{\circ}$', '315$^{\circ}$'])
-            ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
-            ax.set_title('$E =$ %s$E_L$' % frac[i])
-            images.append( fig2img(fig) )
-            ax.clear()
-        writeGif('orbit_%s.gif' % (i+1), images, duration=2./len(images), dither=1)
-except:
-    import sys; sys.exit(0)
