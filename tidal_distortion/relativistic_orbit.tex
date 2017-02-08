@@ -64,11 +64,11 @@ is a generalization of Simpson's rule with step size $\Delta t$.
 
 \item To visualize some important effects from general relativity, consider a correction to the total energy that comes from the simplest example of curved spacetime:
 \begin{equation}
-\frac{1}{2} \left(\frac{E^2}{\mu c^2} - \mu c^2\right) = \frac{1}{2}\mu\left(\frac{dr}{d\tau}\right)^2 + \Phi(r, L)
+\frac{1}{2} \left(\frac{E^2}{\mu c^2} - \mu c^2\right) = \frac{1}{2}\mu\left(\frac{dr}{d\tau}\right)^2 + \Phi(r; L)
 \end{equation}
 where $\tau$ is the proper time, $\mu = m_1 m_2/(m_1 + m_2)$ is the reduced mass, $M = m_1 + m_2$ is the total mass, and the effective potential
 \begin{equation}\label{eq:potential}
-\Phi(r, L) = -\frac{GM\mu}{r} + \frac{L^2}{2\mu r^2} - \frac{GML^2}{c^2\mu r^3}
+\Phi(r; L) = -\frac{GM\mu}{r} + \frac{L^2}{2\mu r^2} - \frac{GML^2}{c^2\mu r^3}
 \end{equation}
 now has an extra attractive centrifugal term. Using what you know about calculus and circular orbits, show that with this potential there can be no stable circular orbits closer than a radius
 \begin{equation}\label{eq:ISCO}
@@ -111,7 +111,11 @@ In astrophysics jargon, this is called the ISCO radius (short for Innermost Stab
 
 \begin{enumerate}
 
-\item 
+\item I've written up a simulation using RK4 in the \href{https://github.com/alurban/mentoring/blob/master/tidal_distortion/scripts/kepler_orbits_rk4.py}{\texttt{scripts/}} directory, whose output is in the \href{https://github.com/alurban/mentoring/blob/master/tidal_distortion/relativistic_orbit/}{\texttt{relativistic\_orbit/}} directory. I won't say much about this, because many of the things I have to say relate to the Schwarzschild orbits simulated in problem 3, and that's probably what you really want to see. However, I will note that instead of integrating total energy, I chose to integrate an equivalent force equation:
+\[ \frac{dr}{dt} = v \]
+\[ \frac{dv}{dt} = \frac{d^2 r}{dt^2} = -\frac{1}{\mu}\frac{\partial\Phi}{\partial r} \]
+\[ \frac{d\varphi}{dt} = \frac{L}{\mu r^2}. \]
+which handles turning points much less artificially. Note, the RK4 method is much better at conserving energy at a fixed step size than Euler's method.
 
 \item In classical mechanics, the two-body problem can be solved exactly in terms of an ``equivalent one-body'' situation, where a particle of mass $\mu = m_1 m_2/(m_1 + m_2)$ behaves as though it's interacting with a stationary particle of mass $M = m_1 + m_2$. There \emph{is} a version of this in general relativity, but it's absurdly complicated (see, for example, \href{https://arxiv.org/pdf/gr-qc/9811091.pdf}{arXiv pre-print gr-qc/9811091}). What I'm giving you here is a first-order approximation that isn't complete, but does capture most of the interesting physics. Once again, we'll think in terms of the center of mass.
 
@@ -142,16 +146,44 @@ r_{\rm ISCO} = \frac{6GM}{c^2}
 Thus, binaries with higher total mass will merge at lower frequencies. (For a non-spinning neutron star binary where each body has a mass 1.4 M$_{\odot}$, we predict the ISCO frequency is around 2800 Hz.)
 
 \hspace{15pt} The ISCO radius is very important. In relativistic orbits, it effectively tells us when two compact objects are about to merge. It is the point past which all orbits that lose any energy can't help but quickly spiral inward. A conceptually neat and very important question is: how much energy has been given off up to this point? If the binary started inspiraling a long time ago and a long way apart, then at ISCO the total energy $E=k\mu c^2$ is some fraction $k$ of the rest mass-energy (which can happen because the potential is negative). From Eq. \ref{eq:potential} we can estimate this fraction:
-\[ c^2(k^2 - 1) = \frac{2\Phi_{\rm ISCO}}{\mu} = -\frac{2GM}{r_{\rm ISCO}} + \frac{L_{\rm ISCO}^2}{\mu^2 r_{\rm ISCO}^2} - \frac{2GML_{\rm ISCO}^2}{c^2\mu^2r_{\rm ISCO}^3} = -\frac{c^2}{9}. \]
-This means roughly $1-k \simeq$ 5.7\% of the rest mass was lost! If $\mu \sim$ 1 M$_{\odot}$, that's upwards of 10$^{46}$ J of energy --  where did it all go? This question will drive the next part of our investigation.
+\[ k^2 - 1 = \frac{2\Phi_{\rm ISCO}}{\mu c^2} = -\frac{2GM}{c^2r_{\rm ISCO}} + \frac{L_{\rm ISCO}^2}{\mu^2 c^2 r_{\rm ISCO}^2} - \frac{2GML_{\rm ISCO}^2}{c^4\mu^2r_{\rm ISCO}^3} = -\frac{1}{9}. \]
+Roughly $1-k \simeq$ 5.7\% of the rest mass was lost! If $\mu \sim$ 1 M$_{\odot}$, that's upwards of 10$^{46}$ J of energy --  where did it all go? This question will drive the next part of our investigation.
 
-\begin{figure}[!t]
+\begin{figure}[!th]
 \centering
 \includegraphics{relativistic_orbit/schwarzschild_potentials.pdf}
 \caption{\label{fig:schwarzschild_potentials}Visualization of effective potentials in curved spacetime, with different snapshots of the angular momentum per unit mass $\mathbf{h} = \mathbf{L}/\mu$. Top: a large value of $h$ leads to the centrifugal barrier we're used to seeing at small $r$. In this case, there are both bound (elliptical) and unbound (hyperbolic) orbits. Middle: A smaller angular momentum weakens the centrifugal barrier, leading to so-called ``capture orbits'' where the extra kinetic energy causes one body to careen into the other. Bottom: The smallest angular momentum possible that still has a stable circular orbit (the ISCO). All other orbits in this potential (and those with smaller $h$) are capture orbits.}
 \end{figure}
 
-\item 
+\item As in the Keplerian case, we can again write down a system of three equations:
+\[ \frac{dr}{d\tau} = v \]
+\[ \frac{dv}{d\tau} = \frac{d^2 r}{d\tau^2} = -\frac{1}{\mu}\frac{\partial\Phi}{\partial r} \]
+\[ \frac{d\varphi}{d\tau} = \frac{L}{\mu r^2}. \]
+As an aside, note that here the equations are in terms of the proper time of either neutron star, which is different from the time $t$ measured by a very distant observer (say, on Earth):
+\[ \frac{d\tau}{dt} = \sqrt{1 - \frac{2GM}{c^2 r}}. \]
+This effect is called \textit{gravitational time dilation}, and is important in both astrophysics and communications -- GPS satellites orbiting the Earth, for example, need to worry about this effect to properly synchronize their clocks. (It's also a problem the astronauts face in the movie \href{https://youtu.be/nOipaf5Rt9o}{\textit{Interstellar}}.) We won't worry too much about time dilation, but it is something you should be aware of.
+
+\hspace{15pt} I have coded up a simulation of Schwarzschild orbits that integrates these equations using the RK4 method. \textbf{This isn't the only way this simulation can be done}, so I encourage you to experiment with other approaches. My simulation lives in the \href{https://github.com/alurban/mentoring/blob/master/tidal_distortion/scripts/schwarzschild_orbits_rk4.py}{\texttt{scripts/}} directory and produces a couple of gifs illustrating capture and bound elliptical orbits. Some other visualizations are shown in Figures \ref{fig:orbit_properties}, \ref{fig:orbit_checks}, and \ref{fig:orbit_diagram}. We will talk about these results and compare them with yours next time.
+
+\begin{figure}
+\centering
+\includegraphics{relativistic_orbit/relativistic_orbit_parameters.pdf}
+\caption{\label{fig:orbit_properties} Features of each simulated orbit as approximated by the RK4 method, with angular momentum $h = L/\mu =$ 3.82$GM/c$. Top: orbital separation, with the radius of the other neutron star shown for reference. Middle: the polar angle $\varphi(t)$. Bottom: instantaneous orbital velocity expressed as a fraction of the speed of light. Notice how the capture orbits approach $c$, right when I cut them off at a radius of $2GM/c^2$....}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+\centering
+\includegraphics{relativistic_orbit/relativistic_sanity_checks.pdf}
+\caption{\label{fig:orbit_checks} Sanity checks on the stability and accuracy of this simulation with the RK4 method. Top: an effective potential diagram with the simulated energy levels indicated. Note that one circular orbit, two elliptical orbits, and two capture orbits were done successfully. Middle and bottom: the total energy and its relative error as a function of time. (The relative error is calculated as $\vert 1 - E_{\rm calculated}/E_{\rm prescribed} \vert \times$ 100\%.) Notice how well the energy is conserved during RK4 integration -- that is, until the capture orbits approach a certain radius.}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+\centering
+\includegraphics{relativistic_orbit/relativistic_orbit_diagram.pdf}
+\caption{\label{fig:orbit_diagram} Traces of several closed orbits I simulated, visualized in polar coordinates in the rest frame of star 1. Thin solid lines show elliptical orbits, while thick solid lines trace the behavior of capture orbits. Note that in this strong gravitational field, the relativistic phenomenon of apsidal precession is pretty obvious, resulting in orbital traces that look like rosettes.}
+\end{figure}
+
+\clearpage
 
 \item 
 
