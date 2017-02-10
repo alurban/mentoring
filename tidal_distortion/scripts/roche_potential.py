@@ -64,7 +64,7 @@ fig.tight_layout()
 plt.savefig('roche_diagram.pdf')
 
 
-# Construct the first figure.
+# Construct another figure with equipotentials drawn.
 fig = plt.figure( figsize=(5, 4.75) )
 ax = fig.add_subplot(111)
 
