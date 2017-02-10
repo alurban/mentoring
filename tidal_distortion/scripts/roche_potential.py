@@ -19,8 +19,7 @@ def potential(x, y, a):
     """ Returns the Roche potential evaluated in the equatorial plane
         with the origin at the center of mass, given the parameters:
             x, y:  Cartesian coordinates in meters
-            a:     orbital separation in meters
-            w:     angular frequency of a circular 2-body orbit """
+            a:     orbital separation in meters """
     a *= 1e3; x *= 1e3; y *= 1e3  # convert distances to km
     dist = m2 / M  # distance from the origin to star 2
     w2 = G*M/a**3  # angular frequency of a circular orbit, squared
