@@ -71,7 +71,9 @@ Can you solve this equation the old-fashioned way (\textit{i.e.} with pen and pa
 \frac{dP}{dr} = - \frac{G}{r^2}\, \rho(r)\, m(r),
 \end{equation}
 where $\rho(r)$ is called the \textit{density profile} and
-\[ \frac{dm}{dr} = \frac{4}{3}\pi r^2 \rho(r) \]
+\begin{equation}\label{eq:mass}
+\frac{dm}{dr} = 4 \pi r^2 \rho(r)
+\end{equation}
 is the mass contained in a shell of radius $r$. (This condition, and the physical state it describes, is called \textit{hydrostatic equilibrium}.) What do $P(r)$ and $m(r)$ look like when the star is uniformly dense (so $\rho$ is a constant)?
 
 \item In astrophysics, a \textit{polytrope} loosely refers to any object whose internal pressure and density are related by
@@ -80,7 +82,7 @@ P = K \rho^{\gamma}
 \end{equation}
 where $K$ and $\gamma$ are constants. In particular, we can imagine, say, a gas of electrons that produce an outward pressure because no two of them can ever occupy the same quantum state (the Pauli exclusion principle). In this case, $\gamma =$ 5/3 and
 \[ K = \frac{\hslash^2}{15\pi^2 m_e} \left( \frac{3\pi^2}{n m_N} \right)^{5/3} \]
-where $m_e$ is the electron mass, $m_N$ the neutron mass, and $n$ the number of nucleons per electron. Try solving Eq. \ref{eq:hydro} numerically using this equation of state with $n=2$, which is a good model for a white dwarf star of total mass 1 $M_{\odot}$ and radius 10$^4$ km that's made mostly of neutral carbon.
+where $m_e$ is the electron mass, $m_N$ the neutron mass, and $n$ the number of nucleons per electron. Try solving Eqs. \ref{eq:hydro} and \ref{eq:mass} numerically using this equation of state with $n=2$, which is a good model for a white dwarf star of total mass 1 $M_{\odot}$ and radius 10$^4$ km that's made mostly of neutral carbon.
 
 \end{enumerate}
 
