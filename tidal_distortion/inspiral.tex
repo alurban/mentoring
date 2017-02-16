@@ -76,7 +76,7 @@ where $\rho(r)$ is called the \textit{density profile} and
 \end{equation}
 is the mass contained in a thin spherical shell of radius $r$. (This condition, and the physical state it describes, is called \textit{hydrostatic equilibrium}.) What do $P(r)$ and $m(r)$ look like when the star is uniformly dense (so $\rho$ is a constant)?
 
-\item In astrophysics, a \textit{polytrope} loosely refers to any object whose internal pressure and density are related by
+\item \textbf{Project Point:} In astrophysics, a \textit{polytrope} loosely refers to any object whose internal pressure and density are related by
 \begin{equation}\label{eq:polytrope}
 P = K \rho^{\gamma}
 \end{equation}
@@ -122,9 +122,9 @@ But since there are two different variables on each side of the equation, these 
 \[ r^4 - r_0^4 = - \frac{256}{5} \frac{G^3}{c^5} \mu M^2 \left(t - t_0\right) \]
 where both $t_0$ and $r_0$ arise from constants of integration. Since they're not independent, we can lump them together into one constant called $t_c$ and rearrange:
 \begin{equation}\label{eq:roft}
-r(t) = \left[ r^4_{\rm ISCO} + \frac{256}{5}\,\frac{G^3}{c^5}\,\mu M^2 \left(t_c - t\right) \right]^{1/4}.
+r(t) = \left( \frac{256}{5}\,\frac{G^3}{c^5}\,\mu M^2 \right)^{1/4} \left(t_c - t\right)^{1/4}.
 \end{equation}
-In this case, we interpret $t_c$ as the time at which the binary reaches its innermost stable circular orbit and the objects ``coalesce,'' \textit{i.e.} $r(t_c) = r_{\rm ISCO}$. In LIGO jargon, this is the \textit{coalescence time}.
+In this case, we interpret $t_c$ as the time at which the binary reaches its innermost stable circular orbit and the objects ``coalesce,'' \textit{i.e.} $r(t_c) = 0$. In LIGO jargon, this is the \textit{coalescence time}.
 
 \item There is another way to interpret the integral in the previous problem. Namely, the time $\Delta t$ taken for the binary to evolve from any initial separation $r$ to any (smaller) separation $r_0 < r$ is
 \[ \Delta t = \frac{5}{256} \frac{c^5}{G^3} \frac{1}{\mu M^2} \left(r^4 - r_0^4\right). \]
@@ -134,10 +134,42 @@ If an equal-mass neutron star system with $m_1=m_2=$ 1.4 $M_{\odot}$ starts its 
 
 \hspace{15pt} This timescale is important because it's the amount of time a signal from compact binary merger remains in LIGO's sensitive frequency band, which currently starts around 20-30 Hz. The binary black hole signal GW 150914 was observed to last for around 0.2 seconds between 35 and 250 Hz with $m_1 \approx m_2 \approx$ 30 $M_{\odot}$, which is roughly in the same ballpark as our prediction that it should evolve from 35 Hz to $f_{\rm ISCO}$ in $\Delta t \simeq$ 0.175 seconds. But it's not exact. What do you think we're missing? And, just for kicks, what was the luminosity of this signal?
 
-\item 
+\item I've coded up a solution to this problem in GitHub, under the \href{https://github.com/alurban/mentoring/blob/master/tidal_distortion/scripts/decaying_orbit.py}{\texttt{tidal\_deformation/scripts}} directory. Its output is plotted in Figures \ref{fig:orbit_parameters}, \ref{fig:inspiral_energy}, and \ref{fig:inspiral_diagram}. Notice that in this simulation, there are a couple of subtleties related to time resolution that can be particularly pernicious if you don't watch out for them -- especially in the last few orbits of the inspiral. Once the neutron stars start to pick up speed, you have to be careful that your step size $\Delta t$ is small enough that errors don't build up and what you get out of the simulation is sensible, smooth motion. To the same effect, you also need to be sure your step size is small enough that you get appreciably close to $r_{\rm ISCO}$ without crossing it. We're going to discuss these issues in group \emph{a lot}.
+
+\hspace{15pt} But I also did something egomaniacal and a tiny bit evil. Every single one of the calculations you do in this simulation can actually be solved analytically -- that is, you can get an \emph{exact} formula for orbital separation, orbital phase, energy, luminosity, orbital velocity, even the gravitational wave frequnecy, all as a function of time. Let's look at one of those examples, the GW frequency. We know that for stable circular orbits, $f_{\rm GW} = 2 f_{\rm orbit} = \omega/\pi$, so
+\begin{align*}
+f_{\rm GW}(t) &= \frac{\omega}{\pi} = \frac{1}{\pi} \left( \frac{GM}{r^3} \right)^{1/2} \\
+  &= \frac{1}{\pi} \left[ GM \left( \frac{5}{256} \, \frac{c^5}{G^3} \, \frac{1}{\mu M^2} \right)^{3/4} \left(t_c - t\right)^{-3/4} \right]^{1/2} \\
+  &= \frac{5^{3/8}}{8\pi} \left( \frac{G\mathcal{M}}{c^3} \right)^{5/8} \left(t_c - t\right)^{-3/8}
+\end{align*}
+where $\mathcal{M} = (m_1 m_2)^{3/5}/(m_1 + m_2)^{1/5}$ is called the \textit{chirp mass}. (The GW frequency as a function of time for our simulated binary is plotted in figure \ref{fig:orbit_parameters}.) Note the distinctive shape of this time-frequency track: as time goes on, the frequency sweeps up, dramatically so toward the end of the inspiral -- almost, but not quite, entirely unlike the sound of a bird chirping! Using general relativity, we could even write down the specific form of this chirping waveform:
+\begin{equation}
+h(t) = \frac{2G\mu}{c^2D} \, \frac{2GM}{c^2r(t)} \, \cos\left(2\varphi(t)\right)
+\end{equation}
+where $D$ is the distance to the binary from Earth. The number of cycles in this binary is $\int_0^{t_c} f_{\rm GW}(t)\,dt$, and the number of orbits completed before merger is half that.
+
+\hspace{15pt} So why did we bother doing a simulation at all? A couple of reasons. First, this is only the roughest approximation to the inspiral, expanded in terms of $v/c$ where $v$ is the orbital velocity. (Such an expansion is called the ``post-Newtonian'' framework.) To search for realistic orbits, we need to include higher-order terms in this expansion. Second, we can only follow the orbit up to ISCO in this scheme -- following beyond that will require full GR. Finally, and this bears repeating, making simulations has us dealing with a lot of subtleties related to time resolution and frame rates. It's enormously helpful to ground ourselves first in a situation we can easily check against pen-and-paper results.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\vspace{1000pt}
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=1]{inspiral/inspiral_orbit_parameters.pdf}
+\caption{\label{fig:orbit_parameters}}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=1]{inspiral/inspiral_energies.pdf}
+\caption{\label{fig:inspiral_energy}}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=1]{inspiral/inspiral_diagram.pdf}
+\caption{\label{fig:inspiral_diagram}}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
 
 \item Let's picture a spherical shell of mass $\delta m$ and radius $r$ concentric with our hypothetical star, where the total mass contained inside is $m(r)$. Then the weight felt by this shell is
 \[ \delta F = - \frac{G\,m(r)}{r^2}\,\delta m = -4\pi G \, \rho(r) \, m(r) \, \delta r \]
@@ -156,8 +188,6 @@ scales with the volume of the star -- that is, until we reach the radius $R_*$ o
 and $P(r>R_*) = 0$ outside of the star.
 
 \hspace{15pt} Note that this model is pretty poor for a couple of reasons. First, physical materials don't remain uniformly dense inside of large bodies: the core of the Earth, for example, is crushed by the titanic weight of all the planet's layers sitting on top of it. Second, physical materials are also affected by thermodynamics, so they'll have an \textit{equation of state} relating $\rho$ and $P$, which we will of course explore in the next problem.
-
-\item 
 
 \end{enumerate}
 
