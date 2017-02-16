@@ -216,13 +216,14 @@ plt.savefig('inspiral_diagram_BBH.pdf')
 
 
 # Finally, write a gif illustrating the inspiral orbit.
+print len(t)
 try:
     from mpl_toolkits.axes_grid.inset_locator import inset_axes
     fig = plt.figure( figsize=(6, 6) )
     ax = fig.add_subplot(1, 1, 1)
     # start the visualization in the last 0.05 seconds
     # with a frame rate that samples at thrice fISCO
-    step = int(1./(2*fISCO*dt))
+    step = 3
     N = len(t[0::step])
     # plot the first frame
     x1, y1 = r[0] * np.cos(phi[0]), r[0] * np.sin(phi[0])

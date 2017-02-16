@@ -235,11 +235,10 @@ try:
     ax.xaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
     ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
     ax.set_title('%.2g--%.2g $M_{\odot}$ (slowed 100x)' % (m1/MSun, m2/MSun))
-    # draw an inset showing the waveform FIXME: LEFT OFF HERE
-    inset_ax = inset_axes(ax, width="30%", height=1., loc=4)
-    condition = np.logical_and(t >= t[start] - 0.005, t < t[start] + 0.005)
-    waveform, = inset_ax.plot(t[condition], h[condition]/1e-20, 'DarkSlateGray')
-    inset_ax.set_xlim([t[condition].min(), t[condition].max()])
+    # draw an inset showing the waveform
+    inset_ax = inset_axes(ax, width="40%", height=1., loc=4)
+    waveform, = inset_ax.plot([], [], 'DarkSlateGray')
+    inset_ax.set_xlim([t[start], t[start] + 0.01])
     inset_ax.xaxis.get_major_formatter().set_useOffset(False)
     inset_ax.set_ylim([-1.05*h.max()/1e-20, 1.05*h.max()/1e-20])
     inset_ax.set_ylabel('strain (10$^{-20}$)')
@@ -252,14 +251,12 @@ try:
         y1 = r[start+step*i] * np.sin(phi[start+step*i])
         star1.set_offsets( (x1/2000, y1/2000) )
         star2.set_offsets( (-x1/2000, -y1/2000) )
-        if t[start+step*i] + 0.005 <= t[-1]:
-            condition = np.logical_and(t >= t[start+step*i] - 0.005, t < t[start+step*i] + 0.005)
-            waveform.set_data(t[condition], h[condition]/1e-20)
-            inset_ax.set_xlim([t[condition].min(), t[condition].max()])
-            return star1, star2, ax, waveform, inset_ax
-        else:
-            return star1, star2, ax
-    anim = FuncAnimation(fig, update, frames=N, interval=20)
+        waveform.set_data(t[start:start+step*i], h[start:start+step*i]/1e-20)
+        maximum = max( (t[start+step*i], t[start] + 0.01) )
+        minimum = maximum - 0.01
+        inset_ax.set_xlim([minimum, maximum])
+        return star1, star2, ax, waveform, inset_ax
+    anim = FuncAnimation(fig, update, frames=N, interval=30)
     anim.save('inspiral.gif', dpi=100, writer='imagemagick')
 except:
     import sys; sys.exit(0)
