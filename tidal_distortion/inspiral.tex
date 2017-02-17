@@ -60,11 +60,11 @@ show that the orbital separation $r$ varies like
 \begin{equation}\label{eq:drdt}
 \frac{dr}{dt} = - \frac{64}{5} \frac{G^3}{c^5} \frac{\mu M^2}{r^3}.
 \end{equation}
-Can you solve this equation the old-fashioned way (\textit{i.e.} with pen and paper)?
+Can you solve this equation for $r(t)$ the old-fashioned way (\textit{i.e.} with pen and paper)?
 
-\item How long does it take the orbit to evolve from a gravitational wave frequency of 20 Hz up to the ISCO frequency? Express this in terms of $\mu$ and $M$.
+\item How long does it take the orbit to evolve from a gravitational wave frequency of 20 Hz up to the ISCO frequency? Express this in terms of $\mu$ and $M$, and try computing the time explicitly for $m_1 = m_2 =$ 1.4 $M_{\odot}$.
 
-\item Numerically integrate equations \ref{eq:GW_luminosity} and \ref{eq:drdt} for a neutron star system with $m_1 = m_2 =$ 1.4 $M_{\odot}$. Plot the orbital separation, orbital velocity ($v/c$), kinetic, potential, and total energies, GW frequency, and the GW luminosity, all as a function of time. (You can start the integration from a separation of 300 km, and follow it all the way up to ISCO.)
+\item Numerically integrate equations \ref{eq:GW_luminosity} and \ref{eq:drdt} for a neutron star system with $m_1 = m_2 =$ 1.4 $M_{\odot}$. Plot the orbital separation, orbital velocity ($v/c$), kinetic, potential, and total energies, GW frequency, and the GW luminosity, all as a function of time. (You can start the integration from a separation of 300 km, and follow it all the way up to ISCO.) How many orbits do you wind up simulating?
 
 \item Now, let's switch gears a bit and start building a model of very dense stellar material. To begin with, use Newtonian physics to try and show that an outward pressure on a spherical star will balance the inward pull of the star's gravity exactly when
 \begin{equation}\label{eq:hydro}
@@ -80,9 +80,9 @@ is the mass contained in a thin spherical shell of radius $r$. (This condition, 
 \begin{equation}\label{eq:polytrope}
 P = K \rho^{\gamma}
 \end{equation}
-where $K$ and $\gamma$ are constants. In particular, we can imagine, say, a gas of electrons that produce an outward pressure because no two of them can ever occupy the same quantum state (the Pauli exclusion principle). In this case, $\gamma =$ 5/3 and
+where $K$ and $\gamma$ are constants. In particular, we can imagine, say, a gas of electrons that produce an outward (nonthermal) pressure because no two of them can ever occupy the same quantum state (the Pauli exclusion principle). In this case, $\gamma =$ 5/3 and
 \[ K = \frac{\hslash^2}{15\pi^2 m_e} \left( \frac{3\pi^2}{n m_N} \right)^{5/3} \]
-where $m_e$ is the electron mass, $m_N$ the neutron mass, and $n$ the number of nucleons per electron. Try solving Eqs. \ref{eq:hydro} and \ref{eq:mass} numerically using this equation of state with $n=2$, which is a good model for a white dwarf star of total mass 1 $M_{\odot}$ and radius 10$^4$ km that's made mostly of neutral carbon.
+where $m_e$ is the electron mass, $m_N$ the neutron mass, and $n$ the number of nucleons per electron. Try solving Eqs. \ref{eq:hydro} and \ref{eq:mass} numerically using this equation of state with $n=2$, which is a good model for a white dwarf star of total mass 1 $M_{\odot}$ and radius 10$^4$ km that's made mostly of neutral carbon. (We will eventually do a relativistic version of this to model the internal pressure of neutron stars.)
 
 \end{enumerate}
 
@@ -124,7 +124,7 @@ where both $t_0$ and $r_0$ arise from constants of integration. Since they're no
 \begin{equation}\label{eq:roft}
 r(t) = \left( \frac{256}{5}\,\frac{G^3}{c^5}\,\mu M^2 \right)^{1/4} \left(t_c - t\right)^{1/4}.
 \end{equation}
-In this case, we interpret $t_c$ as the time at which the binary reaches its innermost stable circular orbit and the objects ``coalesce,'' \textit{i.e.} $r(t_c) = 0$. In LIGO jargon, this is the \textit{coalescence time}.
+In this case, we interpret $t_c$ as the time at which the binary reaches zero separation and the objects ``coalesce,'' \textit{i.e.} $r(t_c) = 0$. In LIGO jargon, this is the \textit{coalescence time}.
 
 \item There is another way to interpret the integral in the previous problem. Namely, the time $\Delta t$ taken for the binary to evolve from any initial separation $r$ to any (smaller) separation $r_0 < r$ is
 \[ \Delta t = \frac{5}{256} \frac{c^5}{G^3} \frac{1}{\mu M^2} \left(r^4 - r_0^4\right). \]
@@ -144,29 +144,29 @@ f_{\rm GW}(t) &= \frac{\omega}{\pi} = \frac{1}{\pi} \left( \frac{GM}{r^3} \right
 \end{align*}
 where $\mathcal{M} = (m_1 m_2)^{3/5}/(m_1 + m_2)^{1/5}$ is called the \textit{chirp mass}. (The GW frequency as a function of time for our simulated binary is plotted in figure \ref{fig:orbit_parameters}.) Note the distinctive shape of this time-frequency track: as time goes on, the frequency sweeps up, dramatically so toward the end of the inspiral -- almost, but not quite, entirely unlike the sound of a bird chirping! Using general relativity, we could even write down the specific form of this chirping waveform:
 \begin{equation}
-h(t) = \frac{2G\mu}{c^2D} \, \frac{2GM}{c^2r(t)} \, \cos\left(2\varphi(t)\right)
+h(t) = \frac{2G\mu}{c^2D} \, \frac{2GM}{c^2r(t)} \, \cos\left(2\varphi(t)\right).
 \end{equation}
-where $D$ is the distance to the binary from Earth. The number of cycles in this binary is $\int_0^{t_c} f_{\rm GW}(t)\,dt$, and the number of orbits completed before merger is half that.
+This quantity measures the relative change in length $\Delta L/L$ of a ruler on Earth due to merging compact objects that live a distance $D$ away, where $\varphi(t) = \int\omega\,dt$ is the orbital phase. (Note that the binaries we see are typically in galaxies hundreds of millions of light-years away. Also, it is \emph{entirely} appropriate to think of LIGO as a very expensive ruler.) The number of wave cycles we observe between some time $t_0$ and the coalescence time $t_c$ is $N_{\rm cyc} = \int_{t_0}^{t_c} f_{\rm GW}(t)\,dt$, and the number of orbits completed in the same time is $N_{\rm cyc}/2$.
 
-\hspace{15pt} So why did we bother doing a simulation at all? A couple of reasons. First, this is only the roughest approximation to the inspiral, expanded in terms of $v/c$ where $v$ is the orbital velocity. (Such an expansion is called the ``post-Newtonian'' framework.) To search for realistic orbits, we need to include higher-order terms in this expansion. Second, we can only follow the orbit up to ISCO in this scheme -- following beyond that will require full GR. Finally, and this bears repeating, making simulations has us dealing with a lot of subtleties related to time resolution and frame rates. It's enormously helpful to ground ourselves first in a situation we can easily check against pen-and-paper results.
+\hspace{15pt} So why did we bother doing a simulation at all? A couple of reasons. First, this is only the roughest approximation to the inspiral, expanded in terms of $v/c$ where $v$ is the orbital velocity. (Such an expansion is called the ``\href{https://en.wikipedia.org/wiki/Post-Newtonian_expansion}{post-Newtonian}'' framework.) When LIGO searches for real compact binary inspirals, we have to include higher-order terms in this expansion to make valid and precise measurements. Second, we can only follow the orbit up to ISCO in this scheme -- following beyond that will require full GR. Finally, and this bears repeating, making simulations has us dealing with a lot of subtleties related to time resolution and frame rates. It's enormously helpful to ground ourselves first in a situation we can easily check against pen-and-paper results.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=1]{inspiral/inspiral_orbit_parameters.pdf}
-\caption{\label{fig:orbit_parameters}}
+\caption{\label{fig:orbit_parameters} Properties of a simulated double neutron star orbit with $m_1=m_2=$ 1.4 $M_{\odot}$. Top: orbital separation as a function of time. Middle: Both the gravitational wave frequency (left axis) and orbital velocity (right axis); note the way the binary accelerates to over 0.4$c$ by the time it reaches ISCO. Bottom: a visualization of this binary's full gravitational waveform, shown as the relative length change $h(t) = \Delta L/L$ we would measure from a distance of 3.26 million light-years. (We call this quantity the \textit{strain} due to gravitational waves.)}
 \end{figure}
 
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=1]{inspiral/inspiral_energies.pdf}
-\caption{\label{fig:inspiral_energy}}
+\caption{\label{fig:inspiral_energy} The energy scales involved during inspiral and merger of our binary neutron star system. Top: the kinetic, potential, and gravitational binding energy of the binary over time. Bottom: the apparent luminosity (or power) emitted in gravitational waves. Note that all energy scales are measured in units of $M_{\odot}c^2$, the rest mass-energy of the Sun, which is somewhere around $\sim$10$^{47}$ Joules. During GW150914, our first detected binary black hole merger, some 3 $M_{\odot}c^2$ of energy was released over a period of $\sim$0.2 seconds, making this by far the most luminous single event ever witnessed by humans. (It's about twice as bright as \emph{every other star in the observable universe at that moment combined}.)}
 \end{figure}
 
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=1]{inspiral/inspiral_diagram.pdf}
-\caption{\label{fig:inspiral_diagram}}
+\caption{\label{fig:inspiral_diagram} Trace of the binary neutron star inspiral, drawn in a reference frame centered on one of the neutron stars. I've cut the plot off at a max separation of 80 km so that you can clearly see the spiral shape that the orbits trace, and I've ended the simulation once the binaries reach a separation of $r_{\rm ISCO} = 6GM/c^2$. Between 40 and 2000 Hz, the system evolved from 300 to 25 km and traced about 890 complete orbits.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
@@ -175,19 +175,19 @@ where $D$ is the distance to the binary from Earth. The number of cycles in this
 \[ \delta F = - \frac{G\,m(r)}{r^2}\,\delta m = -4\pi G \, \rho(r) \, m(r) \, \delta r \]
 since $\delta m = 4\pi r^2 \rho(r) \, \delta r$ according to Eq. \ref{eq:mass}. In order to be in hydrostatic equilibrium, this inward gravitational pull must be balanced by an outward force
 \[ \delta F = 4\pi r^2\,\delta P \]
-where $\delta P$ is the pressure per unit area pushing outward against this shell. Setting the two equations equal and taking the limit as both $\delta r$ and $\delta P$ go to 0, we see that
+where $\delta P = P(r + \delta r) - P(r)$ is the pressure per unit area pushing outward against this shell. Setting the two equations equal and taking the limit as $\delta r$ goes to 0, we see that
 \begin{equation}
-\frac{dP}{dr} = - \frac{G}{r^2} \, \rho(r) \, m(r)
+\frac{dP}{dr} = \lim_{\delta r \rightarrow 0} \frac{P(r + \delta r) - P(r)}{\delta r} = - \frac{G}{r^2} \, \rho(r) \, m(r)
 \end{equation}
 which is just Eq. \ref{eq:hydro}, as we wanted to show.
 
 \hspace{15pt} If the density profile $\rho(r) = \rho_* =$ const., then of course the mass
-\[ m(r) = \frac{4}{3}\pi r^3 \rho_* \]
+\[ m(r \leq R_*) = \frac{4}{3}\pi r^3 \rho_* \]
 scales with the volume of the star -- that is, until we reach the radius $R_*$ of the star, at which point the density falls sharply to 0 and the mass plateus at $m_* = m(R_*)$. The radial pressure is easy to find:
 \[ P(r\leq R_*) = -\frac{4}{3}\pi G\rho^2_* \int r\,dr = \frac{2}{3}\pi G\rho^2_*(R^2_* - r^2) \]
 and $P(r>R_*) = 0$ outside of the star.
 
-\hspace{15pt} Note that this model is pretty poor for a couple of reasons. First, physical materials don't remain uniformly dense inside of large bodies: the core of the Earth, for example, is crushed by the titanic weight of all the planet's layers sitting on top of it. Second, physical materials are also affected by thermodynamics, so they'll have an \textit{equation of state} relating $\rho$ and $P$, which we will of course explore in the next problem.
+\hspace{15pt} Note that this model is pretty poor for a couple of reasons. First, physical materials don't remain uniformly dense inside of large bodies: the core of the Earth, for example, is crushed by the titanic weight of all the planet's layers sitting on top of it. Second, physical materials are also affected by thermodynamics, so they'll have an \textit{equation of state} relating $\rho$ and $P$, which we will of course explore in the Project Point.
 
 \end{enumerate}
 
