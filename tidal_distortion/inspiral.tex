@@ -171,11 +171,13 @@ This quantity measures the relative change in length $\Delta L/L$ of a ruler on 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 
-\item Let's picture a spherical shell of mass $\delta m$ and radius $r$ concentric with our hypothetical star, where the total mass contained inside is $m(r)$. Then the weight felt by this shell is
+\item Let's picture a spherical shell of very small thickness $\delta r$, radius $r$, and mass $\delta m$ concentric with our hypothetical star. In this problem, we're going to relate forces on the shell to $\delta r$ and then take the limit that $\delta r$ goes to zero.
+
+\hspace{15pt} By Gauss's law, the total mass contained inside this shell is $m(r)$. Then the weight felt by the shell is
 \[ \delta F = - \frac{G\,m(r)}{r^2}\,\delta m = -4\pi G \, \rho(r) \, m(r) \, \delta r \]
 since $\delta m = 4\pi r^2 \rho(r) \, \delta r$ according to Eq. \ref{eq:mass}. In order to be in hydrostatic equilibrium, this inward gravitational pull must be balanced by an outward force
 \[ \delta F = 4\pi r^2\,\delta P \]
-where $\delta P = P(r + \delta r) - P(r)$ is the pressure per unit area pushing outward against this shell. Setting the two equations equal and taking the limit as $\delta r$ goes to 0, we see that
+where $\delta P = P(r + \delta r) - P(r)$ is the net pressure per unit area pushing outward against this shell. Setting the two equations equal and taking the limit as $\delta r$ goes to 0, we see that
 \begin{equation}
 \frac{dP}{dr} = \lim_{\delta r \rightarrow 0} \frac{P(r + \delta r) - P(r)}{\delta r} = - \frac{G}{r^2} \, \rho(r) \, m(r)
 \end{equation}
@@ -187,7 +189,7 @@ scales with the volume of the star -- that is, until we reach the radius $R_*$ o
 \[ P(r\leq R_*) = -\frac{4}{3}\pi G\rho^2_* \int r\,dr = \frac{2}{3}\pi G\rho^2_*(R^2_* - r^2) \]
 and $P(r>R_*) = 0$ outside of the star.
 
-\hspace{15pt} Note that this model is pretty poor for a couple of reasons. First, physical materials don't remain uniformly dense inside of large bodies: the core of the Earth, for example, is crushed by the titanic weight of all the planet's layers sitting on top of it. Second, physical materials are also affected by thermodynamics, so they'll have an \textit{equation of state} relating $\rho$ and $P$, which we will of course explore in the Project Point.
+\hspace{15pt} Note that this model is pretty poor for a couple of reasons. First, physical materials don't remain uniformly dense inside of large bodies: the core of the Earth, for example, is crushed by the titanic weight of all the planet's layers sitting on top of it. Second, physical materials are also affected by thermodynamics, so they'll have an \textit{equation of state} relating $\rho$ and $P$, which we will of course explore in the Project Point. (In the problem we just looked at, there is no relationship between $\rho$ and $P$, so the density $\rho_*$ and radius $R_*$ of the star are independent.)
 
 \end{enumerate}
 

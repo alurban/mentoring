@@ -216,7 +216,6 @@ plt.savefig('inspiral_diagram_BBH.pdf')
 
 
 # Finally, write a gif illustrating the inspiral orbit.
-print len(t)
 try:
     from mpl_toolkits.axes_grid.inset_locator import inset_axes
     fig = plt.figure( figsize=(6, 6) )
@@ -236,8 +235,7 @@ try:
     ax.set_ylabel('distance (km)')
     ax.xaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
     ax.yaxis.set_major_formatter(ticker.FormatStrFormatter("%d"))
-    ax.set_title('%.2g--%.2g $M_{\odot}$ (slowed 100x)' % (m1/MSun, m2/MSun))
-    # draw an inset showing the waveform FIXME: LEFT OFF HERE
+    ax.set_title('%.2g--%.2g $M_{\odot}$ (slowed 10x)' % (m1/MSun, m2/MSun))
     inset_ax = inset_axes(ax, width="40%", height=1., loc=4)
     waveform, = inset_ax.plot([], [], 'DarkSlateGray')
     inset_ax.set_xlim([t.min(), t.max()])
