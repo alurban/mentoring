@@ -1,6 +1,6 @@
 BYPROD = *.aux *.log *.out *.dvi *.blg *.bbl *.xml *.bcf *.synctex.gz *Notes.bib
 
-all: intro keplerian_orbit relativistic_orbit inspiral
+all: intro keplerian_orbit relativistic_orbit inspiral white_dwarf
 
 %: %/*.pdf %.tex
 	pdflatex -draftmode $(@:.pdf=) && \
