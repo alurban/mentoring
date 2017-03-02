@@ -64,6 +64,7 @@ make intro
 make keplerian_orbits
 make relativistic_orbits
 make inspiral
+make white_dwarf
 ```
 
 To re-generate drafts of all notes:
