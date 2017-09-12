@@ -111,7 +111,7 @@ In astrophysics jargon, this is called the ISCO radius (short for Innermost Stab
 
 \begin{enumerate}
 
-\item I've written up a simulation using RK4 in the \href{https://github.com/alurban/mentoring/blob/master/tidal_distortion/scripts/kepler_orbits_rk4.py}{\texttt{scripts/}} directory, whose output is in the \href{https://github.com/alurban/mentoring/blob/master/tidal_distortion/relativistic_orbit/}{\texttt{relativistic\_orbit/}} directory. I won't say much about this, because many of the things I have to say relate to the Schwarzschild orbits simulated in problem 3, and that's probably what you really want to see. However, I will note that instead of integrating total energy, I chose to integrate an equivalent force equation:
+\item I've written up a simulation using RK4 in the \href{https://github.com/alurban/mentoring/blob/master/tidal_disruption/scripts/kepler_orbits_rk4.py}{\texttt{scripts/}} directory, whose output is in the \href{https://github.com/alurban/mentoring/blob/master/tidal_disruption/relativistic_orbit/}{\texttt{relativistic\_orbit/}} directory. I won't say much about this, because many of the things I have to say relate to the Schwarzschild orbits simulated in problem 3, and that's probably what you really want to see. However, I will note that instead of integrating total energy, I chose to integrate an equivalent force equation:
 \[ \frac{dr}{dt} = v \]
 \[ \frac{dv}{dt} = \frac{d^2 r}{dt^2} = -\frac{1}{\mu}\frac{\partial\Phi}{\partial r} \]
 \[ \frac{d\varphi}{dt} = \frac{L}{\mu r^2}. \]
@@ -163,7 +163,7 @@ As an aside, note that here the equations are in terms of the proper time of eit
 \[ \frac{d\tau}{dt} = \sqrt{1 - \frac{2GM}{c^2 r}}. \]
 This effect is called \textit{gravitational time dilation}, and is important in both astrophysics and communications -- GPS satellites orbiting the Earth, for example, need to worry about this effect to properly synchronize their clocks. (It's also a problem the astronauts face in the movie \href{https://youtu.be/nOipaf5Rt9o}{\textit{Interstellar}}.) We won't worry too much about time dilation, but it is something you should be aware of.
 
-\hspace{15pt} I have coded up a simulation of Schwarzschild orbits that integrates these equations using the RK4 method. \textbf{This isn't the only way this simulation can be done}, so I encourage you to experiment with other approaches. My simulation lives in the \href{https://github.com/alurban/mentoring/blob/master/tidal_distortion/scripts/schwarzschild_orbits_rk4.py}{\texttt{scripts/}} directory and produces a couple of gifs illustrating capture and bound elliptical orbits. Some other visualizations are shown in Figures \ref{fig:orbit_properties}, \ref{fig:orbit_checks}, and \ref{fig:orbit_diagram}. We will talk about these results and compare them with yours next time.
+\hspace{15pt} I have coded up a simulation of Schwarzschild orbits that integrates these equations using the RK4 method. \textbf{This isn't the only way this simulation can be done}, so I encourage you to experiment with other approaches. My simulation lives in the \href{https://github.com/alurban/mentoring/blob/master/tidal_disruption/scripts/schwarzschild_orbits_rk4.py}{\texttt{scripts/}} directory and produces a couple of gifs illustrating capture and bound elliptical orbits. Some other visualizations are shown in Figures \ref{fig:orbit_properties}, \ref{fig:orbit_checks}, and \ref{fig:orbit_diagram}. We will talk about these results and compare them with yours next time.
 
 \begin{figure}
 \centering

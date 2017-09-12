@@ -19,7 +19,7 @@ Alternatively, you can open this repository in your desktop or download a ZIP-co
 Contents
 --------
 
-* [tidal_distortion](https://github.com/alurban/mentoring/tree/master/tidal_distortion) -- A project that builds a toy model of binary neutron star inspirals using both Keplerian and relativistic laws of motion
+* [tidal_disruption](https://github.com/alurban/mentoring/tree/master/tidal_disruption) -- A project that builds a toy model of binary neutron star inspirals using both Keplerian and relativistic laws of motion
 
 Other Resources
 ---------------
