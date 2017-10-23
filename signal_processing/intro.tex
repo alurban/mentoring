@@ -30,11 +30,11 @@ Pasadena, CA 91125, USA \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section*{An Introduction to LIGO Astronomy}
-\hspace{15pt} Suppose that two neutron stars with masses $m_1 \geq m_2$ are in a stable circular orbit (see Figure \ref{fig:binary_diagram}).
-As we have recently observed in the transient signal \href{https://journals.aps.org/prl/pdf/10.1103/PhysRevLett.119.161101}{GW170817}, this
-system will radiate away its potential energy over time in the form of gravitational waves. In this group problem set, we'll first write down
-a few observables to flesh out some details of how this happens. Then, we'll look at some very real examples of astrophysics that can be
-learned through gravitational wave (GW) and electromagnetic (EM) observations.
+\hspace{15pt} Suppose two neutron stars with masses $m_1 \geq m_2$ are in a stable circular orbit (see Figure \ref{fig:binary_diagram}).
+As we have recently observed in the transient signal \href{https://journals.aps.org/prl/pdf/10.1103/PhysRevLett.119.161101}{GW170817}, such a
+system will radiate away much of its potential energy over time in the form of gravitational waves. In this group problem set, we'll first
+estimate a few observables to sketch out a back-of-the-envelope view of what merger events look like. Then, we'll look at some very real
+examples of astrophysics that can be learned through gravitational wave (GW) and electromagnetic (EM) observations.
 
 In group discussion we'll build an intuition by tinkering with some signal processing techniques, imagining how to observe this system with the
 ground-based LIGO detectors. This will make use of data obtained from the \href{https://losc.ligo.org}{LIGO Open Science Center}, a service of
@@ -58,47 +58,53 @@ indicated.}
 
 \begin{enumerate}
 
-\item Recall that according to general relativity, it's very difficult to extract energy from this system once it reaches the innermost stable
-circular orbit (ISCO), which has a separation of roughly
+\item \textbf{ISCO'mplicated.} Recall that according to general relativity, it's very difficult to extract energy from this system once it reaches
+the innermost stable circular orbit (ISCO), which has a separation of approximately
 \begin{equation}\label{eq:rISCO}
-r_{\rm ISCO} = \frac{6GM}{c^2}.
-\end{equation}
-Given that the GW frequency is twice the orbital frequency, use Kepler's third law to write down a rough scaling law for the observed frequency
-$f_{\rm ISCO}$ at ISCO in terms of $M$.
+r_{\rm ISCO} \approx \frac{6GM}{c^2}.
+\end{equation} This separation is roughly the point where merger occurs.\begin{enumerate}
+\item Given that $f_{\rm GW} = 2f_{\rm orbital}$, use Kepler's third law to estimate how the observed GW frequency $f_{\rm ISCO}$ at ISCO scales in
+terms of $M$.
 
-\item What is $f_{\rm ISCO}$ in Hz if $M =$\, 2.74\,$M_{\odot}$?
+\item What are $r_{\rm ISCO}$ (in km) and $f_{\rm ISCO}$ (in Hz) if $M =$\, 2.74\,$M_{\odot}$? Where is $f_{\rm ISCO}$ relative to LIGO's sensitive
+band, about 20 -- 2000 Hz?
 
-\item Recall that the orbital separation, $r$, shrinks over time as potential energy is lost to gravitational waves. Consequently, the frequency
-sweeps up. In a previous problem set we approximated this process as
+\item What is the orbital separation when the observed signal crosses 20 Hz? How does this compare to, say, the trip from Los Angeles to San
+Francisco?
+\end{enumerate}
+
+\item \textbf{The Final Countdown.} Recall that the orbital separation, $r$, shrinks over time as potential energy is lost to gravitational waves.
+Consequently, the frequency sweeps up. In a previous problem set we approximated this process as
 \begin{equation}\label{eq:drdt}
 \frac{dr}{dt} = - \frac{64}{5} \frac{G^3}{c^5} \frac{\mu M^2}{r^3}.
-\end{equation}
-\textbf{Without} solving any differential equations, estimate how long it takes the system to evolve from an observed frequency of $f_0$ up
-through merger. First, find the characteristic timescale of Eq. \ref{eq:drdt} starting from some initial distance $r_0$; then, use Kepler's
-third law to relate $r_0$ to $f_0$.
+\end{equation}\begin{enumerate}
+\item \emph{Without} solving any differential equations, estimate how long it takes the system to evolve from an observed frequency of $f_0$ up
+through merger, in terms of $\mu$ and $M$.
 
-\item Once the signal crosses 20 Hz, how long do we have until merger (in seconds) if $m_1 = $\, 1.57\,$M_{\odot}$ and $m_2 =$\,
-1.17\,$M_{\odot}$? How does this compare with the observed duration ($\sim$100 s) of transient signal GW170817 in LIGO Livingston's sensitive
-frequency band?
+\item Once the signal crosses 20 Hz, how long do we have until merger if $m_1 = $\, 1.57\,$M_{\odot}$ and $m_2 =$\, 1.17\,$M_{\odot}$? How does
+this compare with the observed duration ($\sim$100 s) of GW170817 in LIGO's sensitive frequency band?
 
-\item \textbf{Event counting.} The U.S.-based LIGO detectors in Hanford, WA, and Livingston, LA, recorded data for about 49 days from September
-2015 -- January 2016, and again for about 117 days from November 2016 -- August 2017. While the noise floor in each detector fluctuated greatly
-during these observing periods, we can estimate the detectors' average sensitive distance for binary neutron star mergers as 70 Mpc. In other
-words, as we'll discuss in group, mergers of two neutron stars out to about this distance would produce strong enough gravitational waves to be
-detected by LIGO.
+\item What is the orbital velocity ($v/c$) when the observed signal is at 20 Hz? At $f_{\rm ISCO}$?
+\end{enumerate}
 
-Given that we have observed exactly one such merger so far, what is the inferred rate of binary neutron star merger events in Gpc$^{-3}$ yr$^{-1}$?
+\item \textbf{Event rates.} The LIGO detectors in Hanford, WA, and Livingston, LA, recorded data for about 49 days from Sept 2015 -- Jan 2016,
+and again for about 117 days from Nov 2016 through Aug 2017. While the noise floor in each detector fluctuated greatly during this time, we can
+estimate the detectors' average sensitive distance for binary neutron star mergers as 70 Mpc. In other words, as we'll discuss in group, mergers
+of two neutron stars out to about this distance would produce strong enough gravitational waves to be detected by LIGO.
 
-\item What is the same rate, per \emph{galaxy} per year? (Assume one galaxy takes up roughly 1 Mpc$^3$.)
+\begin{enumerate}
+\item Given that we have observed exactly one such merger so far, what is the inferred rate of binary neutron star merger events in Gpc$^{-3}$
+yr$^{-1}$?
 
-\item \textbf{Striking gold!} From EM observations\footnote{Cowperthwaite \textit{et al.}, \href{http://iopscience.iop.org/article/10.3847/2041-8213/aa8fc7}{\textit{
-Astrophysical Journal Letters} \textbf{848}, 2} (2017).} we have learned that some $\sim$0.05\,$M_{\odot}$ of ejecta were released during an
-explosive kilonova after the merger event. It has been suspected for some time that explosions like these are responsible for producing most of
-the elements heavier than iron (such as gold, silver, and platinum) in the universe. Using the measured ejecta mass and your estimate of the
-neutron star merger rate per galaxy, can you comment on how this compares to the estimated rate of heavy element synthesis of 10$^{-\text{7}}$\,$M_{\odot}$
-yr$^{-1}$ in the Milky Way?
+\item What is the rate per \emph{galaxy} per year? (Assume one galaxy takes up 1 Mpc$^3$.)
+\end{enumerate}
 
-\item What uncertainties do you think there are in these measurements?
+\item \textbf{We struck gold!} From EM observations\footnote{Cowperthwaite \textit{et al.},
+\href{http://iopscience.iop.org/article/10.3847/2041-8213/aa8fc7}{\textit{Astrophysical Journal Letters} \textbf{848}, 2} (2017).} we have learned
+that some $\sim$0.05\,$M_{\odot}$ of ejecta were released during an explosive kilonova after the merger event. It has been suspected for some time
+that explosions like this produce most of the elements heavier than iron (such as gold, silver, and platinum) in the universe. Assuming this one
+event is representative, how much material do neutron star mergers produce per galaxy each year? How does this compare with the estimated rate of
+heavy element synthesis, 10$^{-\text{7}}$\,$M_{\odot}$ yr$^{-1}$, in the Milky Way? What uncertainties are there in these estimates?
 
 \end{enumerate}
 
